@@ -1,0 +1,153 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{../manuel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\title{VG401 --- Probabilistic \\ Methods in Engineering}
+\subtitle{Assigment 1}
+\instructor{\href{mailto:horst@sjtu.edu.cn}{Horst Hohberger}}
+\author{Group 37}
+\semester{Spring}
+\year{2019}
+\blockinfo{
+	\begin{center}
+		\textbf{Group members}
+	\end{center}
+	\begin{itemize}\itemsep .25cm
+		\item \href{mailto:}{Chenmin Hou} ()
+		\item \href{mailto:liuyh615@126.com}{Yihao Liu} (515370910207)
+		\item \href{mailto:}{Yuzhou Li} ()
+	\end{itemize}
+}
+
+\renewcommand{\thesubsection}{Exercise 1.\arabic{subsection}}
+
+\begin{document}
+
+\maketitle
+
+\subsection{Elementary Probability}
+
+First, do not consider my friend, the probability that I will be chosen is
+$$P[\textrm{me}]=\frac{120}{2000}.$$
+Then, if I'm already been chosen, the probability that my friend will also be chosen is
+$$P[\textrm{friend}]=\frac{119}{1999}.$$
+So the probability that I and my friend will both be chosen is
+$$P[\textrm{both}]=P[\textrm{me}]P[\textrm{friend}]=\frac{597}{99950}.$$
+
+\subsection{Some Routine Calculations}
+
+\begin{enumerate}[label=\roman*)]
+\item
+Let $A^C=B\setminus A$, then $A\cup A^C=B$, $A\cap A^C=\emptyset$, according to the axioms of probability,
+$$P[B]=P[A\cup A^C]=P[A]+P[A^C].$$
+Since $P[A^C]\geqslant 0$, we can get
+$$P[A]\leqslant P[B].$$
+\item 
+Since $A$ and $B$ are independent, according to the axioms of probability,
+$$P[A]P[B]=P[A\cap B]>0.$$
+However, if $A$ and $B$ are not mutually exclusive,
+$A\cap B=\emptyset$, then
+$$P[A\cap B]=P[\emptyset]=0,$$
+which is a contradiction, so $A$ and $B$ are not mutually exclusive. \bigskip
+\item 
+Let $X=A\setminus(A\cap B)$, $Y=B\setminus(A\cap B)$, then 
+$$A\cup B=X\cup Y\cup (A\cap B),$$
+$$X\cap Y=X\cap(A\cap B)=Y\cap(A\cap B)=\emptyset.$$
+According to the axioms of probability,
+$$P[A\cup B]=P[X\cup Y\cup (A\cap B)]=P[X]+P[Y]+P[A\cap B],$$
+$$P[A]=P[X\cup(A\cap B)]=P[X]+P[A\cap B],$$
+$$P[B]=P[Y\cup(A\cap B)]=P[Y]+P[A\cap B].$$
+So $$P[A\cup B]=P[X]+P[Y]-P[A\cap B].$$
+\end{enumerate}
+
+\subsection{D'Alembert's Coins}
+
+\begin{enumerate}[label=\roman*)]
+\item
+Suppose it is possible to have a coin biased in the way that the probability of head is $p$, thus the probability of tail should be $1-p$. Record the head as $h$ and the tail as $t$, then
+$$\left\{
+\begin{aligned}
+&P[hh]=P[h]^2=p^2&=\frac{1}{3},\\
+&P[ht]+P[th]=2P[h]P[t]=p(1-p)&=\frac{1}{3},\\
+&P[tt]=P[t]^2=(1-p)^2&=\frac{1}{3}.
+\end{aligned}\right.
+$$
+If $p^2=(1-p)^2$, then $p=\dfrac{1}{2}$, but $p^2=\dfrac{1}{3}$, so
+the system of equations can't be solved, it's impossible. \bigskip
+\item
+Suppose it is possible to have the head of first coin with the probability of $p_1$, and that of the second coin with the probability of $p_2$, thus the probability of tails should be $1-p_1$ and $1-p_2$. Use the same notation $h$ and $t$, then
+$$\left\{
+\begin{aligned}
+&P[hh]=P[h_1]P[h_2]=p_1p_2&=\frac{1}{3},\\
+&P[ht]+P[th]=P[h_1]P[t_2]+P[t_1]P[h_2]=p_1(1-p_2)+p_2(1-p_1)&=\frac{1}{3},\\
+&P[tt]=P[t_1]P[t_2]=(1-p_1)(1-p_2)=1-p_1-p_2+p_1p_2&=\frac{1}{3}.
+\end{aligned}\right.
+$$
+We can simply get $p_1+p_2=1$, and $p_1^2+(1-p_1)^2=\dfrac{1}{3}$, but this equation can't be solved in $\mathbb{R}$, so it's impossible.
+\end{enumerate}
+
+\subsection{Independence}
+
+Suppose event $A$ be ``the first question concerning the barn is asked'', and event $B$ be ``claiming to have seen the non-existing barn in the second question'', $P[A]=0.5$.
+\begin{enumerate}[label=\roman*)]
+\item
+$$P[B]=P[B|A]P[A]+P[B|\neg A]P[\neg A]=0.17\cdot0.5+0.03\cdot0.5=0.1.$$
+\item
+$$P[A|B]=\frac{P[B|A]P[A]}{P[B]}=\frac{0.17\cdot0.5}{0.1}=0.85\neq P[A].$$
+So claiming to see the barn is not independent of being asked the first question about the barn.
+\end{enumerate}
+
+\subsection{This one may need a little thinking about...}
+
+Suppose event $A$ be ``the chip is stolen'', and event $B$ be ``the chip is defective'', then
+$$P[B|A]=0.5,\quad P[B|\neg A]=0.05,\quad P[A]=0.01,\quad P[\neg A]=0.99.$$
+According to Bayes's Theorem,
+$$P[A|B]=\frac{P[B|A]P[A]}{P[B|A]P[A]+P[B|\neg A]P[\neg A]}=\frac{0.5\cdot0.01}{0.5\cdot0.01+0.05\cdot0.99}=\frac{10}{109}.$$
+
+\subsection{Monty Hall in Prison?}
+
+Both of them are not correct.
+
+Suppose event $X$ be ``prisoner $X$ will be executed the next morning'', event $X^*$ be ``the warden told that $X$ is not to be executed'', then
+$$P[A]=P[B]=P[C]=\frac{1}{3},$$
+$$P[B^*|A]=\frac{1}{2},\quad P[B^*|B]=0,\quad P[B^*|C]=1.$$
+$$P[A|B^*]=\frac{P[B^*|A]P[A]}{P[B^*|A]P[A]+P[B^*|B]P[B]+P[B^*|C]P[C]}=\frac{\frac{1}{2}\cdot\frac{1}{3}}{\frac{1}{2}\cdot\frac{1}{3}+1\cdot\frac{1}{3}}=\frac{1}{3}.$$
+
+According to symmetric, if we use $C^*$, the result will be the same, so prisoner $A$ still have $\dfrac{1}{3}$ chance of dying, the wander won't give $A$ any information. However, if the wander told $A$ that $B$ is not to be executed, then he will give information about $B$ and $C$, since $P[B|B^*]=0$ and $P[C|B^*]=\dfrac{2}{3}$.
+
+\subsection{Two Children Paradox - Birthday Party!}
+
+Since the birthday party is in July, we can conclude that if there are two boys, at least one boy was born in July; if there is one boy and one girl, the boy must be born in July.
+$$P[\textrm{two boys, at least one born in July}]=\frac{1}{4}\cdot\left(1-\frac{11^2}{12^2}\right)=\frac{23}{
+576}.$$
+$$P[\textrm{one boy born in July and one girl}]=\frac{1}{2}\cdot\frac{1}{12}=\frac{1}{24}.$$
+So the probability that the lady's other child is a girl is
+$$P=\frac{P[\textrm{one boy born in July and one girl}]}{P[\textrm{two boys, at least one born in July}]+P[\textrm{one boy born in July and one girl}]}=\frac{24}{47}.$$
+
+\subsection{Discrete Uniform Distribution}
+
+\begin{enumerate}[label=\roman*)]
+\item 
+$$m_X(t)=E[e^{tX}]=\sum_{k=1}^n\frac{1}{n}e^{kt}=\frac{e^t(1-e^{nt})}{n(1-e^t)}.$$
+\item
+$$E[X]=\left.\frac{dm_X(t)}{dt}\right|_{t=0}=\left.\sum_{k=1}^n\frac{k}{n}e^{kt}\right|_{t=0}=\frac{n(n+1)}{2n}=\frac{n+1}{2}.$$
+$$E[X^2]=\left.\frac{d^2m_X(t)}{dt^2}\right|_{t=0}=\left.\sum_{k=1}^n\frac{k^2}{n}e^{kt}\right|_{t=0}=\frac{n(n+1)(2n+1)}{6n}=\frac{(n+1)(2n+1)}{6}.$$
+$$Var[X]=E[X^2]-E[X]^2=\frac{(n+1)(2n+1)}{6}-\frac{(n+1)^2}{4}=\frac{(n-1)(n+1)}{12}.$$
+\end{enumerate}
+
+\subsection{Uniqueness of Moment Generating Functions - Simple Case}
+$$m_X(t)=E[e^{tX}]=\sum_{k=0}^nf_Xe^{kt},$$
+$$m_Y(t)=E[e^{tY}]=\sum_{k=0}^nf_Ye^{kt}.$$
+For all $t\in(-\varepsilon,\varepsilon)$, $\varepsilon>0$,
+$$m_X(t)-m_Y(t)=\sum_{k=0}^n(f_X(k)-f_Y(k))e^{kt}=0.$$
+Let series $a_k=f_X(k)-f_Y(k)$ and $x=e^t$, where $x\in(e^{-\varepsilon},e^\varepsilon)$,
+$$m_X(t)-m_Y(t)=\sum_{k=0}^na_kx^k=0.$$
+It becomes a polynomial of $x$ of at most degree $n$ with coefficients $\{a_k\}$ if $a_k$ is not always zero, and the value of this polynomial is always zero. Then we can write it into a polynomial equation of infinite number of roots $x\in(e^{-\varepsilon},e^\varepsilon)$,
+$$F(x)=\sum_{k=0}^na_kx^k=0.$$
+However, according to the fundamental theorem of algebra, a polynomial of degree $n$ can have at most $n$ (complex) roots, which makes a contradiction. So $F(x)$ can't be a polynomial, meaning that $a_k=0$ for all $k=0,\dots,n$. Then we can deducted that
+$$f_X(x)=f_Y(x)\quad\textrm{for}\quad x=0,\dots,n.$$
+\end{document}
+
+
