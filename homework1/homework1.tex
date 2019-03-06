@@ -130,11 +130,11 @@ $$P=\frac{P[\textrm{one boy born in July and one girl}]}{P[\textrm{two boys, at 
 
 \begin{enumerate}[label=\roman*)]
 \item 
-$$m_X(t)=E[e^{tX}]=\sum_{k=1}^n\frac{1}{n}e^{kt}=\frac{e^t(1-e^{nt})}{n(1-e^t)}.$$
+$$m_X(t)=E[e^{tX}]=\sum_{k=1}^n\frac{1}{n}e^{x_kt}.$$
 \item
-$$E[X]=\left.\frac{dm_X(t)}{dt}\right|_{t=0}=\left.\sum_{k=1}^n\frac{k}{n}e^{kt}\right|_{t=0}=\frac{n(n+1)}{2n}=\frac{n+1}{2}.$$
-$$E[X^2]=\left.\frac{d^2m_X(t)}{dt^2}\right|_{t=0}=\left.\sum_{k=1}^n\frac{k^2}{n}e^{kt}\right|_{t=0}=\frac{n(n+1)(2n+1)}{6n}=\frac{(n+1)(2n+1)}{6}.$$
-$$Var[X]=E[X^2]-E[X]^2=\frac{(n+1)(2n+1)}{6}-\frac{(n+1)^2}{4}=\frac{(n-1)(n+1)}{12}.$$
+$$E[X]=\left.\frac{dm_X(t)}{dt}\right|_{t=0}=\left.\sum_{k=1}^n\frac{x_k}{n}e^{x_kt}\right|_{t=0}=\sum_{k=1}^n\frac{x_k}{n}.$$
+$$E[X^2]=\left.\frac{d^2m_X(t)}{dt^2}\right|_{t=0}=\left.\sum_{k=1}^n\frac{x_k^2}{n}e^{x_kt}\right|_{t=0}=\sum_{k=1}^n\frac{x_k^2}{n}.$$
+$$Var[X]=E[X^2]-E[X]^2=\sum_{k=1}^n\frac{x_k^2}{n}-\left(\sum_{k=1}^n\frac{x_k}{n}\right)^2.$$
 \end{enumerate}
 
 \subsection{Uniqueness of Moment Generating Functions - Simple Case}
