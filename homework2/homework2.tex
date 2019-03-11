@@ -1,0 +1,56 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{../ve401}
+
+\author{Group 37}
+\semester{Spring}
+\year{2019}
+\subtitle{Assignment}
+\subtitlenumber{2}
+\blockinfo{
+	\bigskip
+	\begin{center}
+		\textbf{Group members}
+	\end{center}
+	\begin{itemize}\itemsep .25cm
+		\item \href{mailto:hcm_9809@sjtu.edu.cn}{Chenmin Hou} (517370910248)
+		\item \href{mailto:liuyh615@126.com}{Yihao Liu} (515370910207)
+		\item \href{mailto:lyz0123@sjtu.edu.cn}{Yuzhou Li} (517021910922)
+	\end{itemize}
+}
+
+\newcommand{\comb}{1}
+
+\begin{document}
+
+\maketitle
+
+\subsection{Drawing until First Success in the Hypergeometric Setting}
+
+\begin{enumerate}[label=\roman*)]
+\item
+Let $H[n]$ be the unit step function, such that 
+$$H[n]=\left\{\begin{aligned}
+0,&\quad n<0\\1,&\quad n\geqslant 0
+\end{aligned}\right..$$
+Since ${\rm ran}\ X\subset N$,
+$$E[X]=\sum_{x\in N}x\cdot f_X(x)=\sum_{x=1}^\infty x\cdot P[X=x]=\sum_{x=0}^\infty x\cdot P[X=x].$$
+And
+\begin{align*}
+\sum_{x=0}^\infty P[X>x]
+&=\sum_{x=0}^\infty\sum_{y=x+1}^\infty P[X=y]\\
+&=\sum_{x=0}^\infty\sum_{y=0}^\infty P[X=y]H[y-x-1]\\
+&=\sum_{y=0}^\infty P[X=y]\sum_{x=0}^\infty H[y-x-1]\\
+&=\sum_{y=0}^\infty P[X=y]\cdot y\\
+&=E[X].
+\end{align*}
+\item
+$$P[X>x]=\frac{(N-r,x)}{(N,x)}$$
+$$\begin{pmatrix}
+1\\2
+\end{pmatrix}$$
+\end{enumerate}
+
+\end{document}
+
+
