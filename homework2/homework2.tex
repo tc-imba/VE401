@@ -19,8 +19,6 @@
 	\end{itemize}
 }
 
-\newcommand{\comb}{1}
-
 \begin{document}
 
 \maketitle
@@ -33,7 +31,7 @@ Let $H[n]$ be the unit step function, such that
 $$H[n]=\left\{\begin{aligned}
 0,&\quad n<0\\1,&\quad n\geqslant 0
 \end{aligned}\right..$$
-Since ${\rm ran}\ X\subset N$,
+Since ${\rm ran}\ X\subset \mathbb{N}$,
 $$E[X]=\sum_{x\in N}x\cdot f_X(x)=\sum_{x=1}^\infty x\cdot P[X=x]=\sum_{x=0}^\infty x\cdot P[X=x].$$
 And
 \begin{align*}
@@ -45,11 +43,32 @@ And
 &=E[X].
 \end{align*}
 \item
-$$P[X>x]=\frac{(N-r,x)}{(N,x)}$$
-$$\begin{pmatrix}
-1\\2
-\end{pmatrix}$$
+Let $x$ be the number of balls drawn, $x\in [0,N-r+1]\cap\mathbb{N}$
+$$P[X>x]=\frac{\binom{r}{0}\binom{N-r}{x-0}}{\binom{N}{x}}=\frac{\binom{N-r}{x}}{\binom{N}{x}}=\frac{\frac{(N-r)!}{x!(N-r-x)!}}{\frac{N!}{x!(N-x)!}}=\frac{(N-r)!(N-x)!}{N!(N-r-x)!}.$$
+According to i),
+$$E[X]=\sum_{x=0}^\infty P[X>x]=\frac{(N-r)!}{N!}\sum_{x=0}^{N-r} \frac{(N-x)!}{(N-r-x)!}=\frac{(N-r)!r!}{N!}\sum_{x=0}^{N-r}\binom{N-x}{r}.$$
+Let $k=N-r-x$, $b=N-r$,
+\begin{align*}
+E[X]&=\frac{(N-r)!r!}{N!}\sum_{k=0}^{N-r}\binom{r+k}{r}
+=\frac{(N-r)!r!}{N!}\sum_{k=0}^{b}\binom{N-b+k}{N-b}\\
+&=\frac{(N-r)!r!}{N!}\binom{N+1}{N-b+1}
+=\frac{(N-r)!r!}{N!}\cdot\frac{(N+1)!}{(r+1)!(N-r)!}\\
+&=\frac{N+1}{r+1}.
+\end{align*}
 \end{enumerate}
+
+\subsection{Density of the Poisson Approximation}
+
+Suppose $$p_x(t)=\frac{(\lambda t)^xe^{-\lambda t}}{x!}.$$
+When $x=0$,
+$$p_0'=-\lambda p_0\Longrightarrow p_0(t)=Ce^{-\lambda t}.$$
+Since the probability of $x=0$ arrivals at time $t=0$ is 1, we can obtain $p_0(0)=1$, then
+$$p_0(t)=e^{-\lambda t},$$
+which satisfy the formula of $p_x(t)$.
+When $x=x+1$,
+$$p_{x+1}'(t)+\lambda p_{x+1}(t)=\lambda p_x(t)=\frac{\lambda(\lambda t)^xe^{-\lambda t}}{x!}$$
+
+
 
 \end{document}
 
