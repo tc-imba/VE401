@@ -65,10 +65,15 @@ $$p_0'=-\lambda p_0\Longrightarrow p_0(t)=Ce^{-\lambda t}.$$
 Since the probability of $x=0$ arrivals at time $t=0$ is 1, we can obtain $p_0(0)=1$, then
 $$p_0(t)=e^{-\lambda t},$$
 which satisfy the formula of $p_x(t)$.
+
 When $x=x+1$,
-$$p_{x+1}'(t)+\lambda p_{x+1}(t)=\lambda p_x(t)=\frac{\lambda(\lambda t)^xe^{-\lambda t}}{x!}$$
+$$p_{x+1}'(t)+\lambda p_{x+1}(t)=\lambda p_x(t)=\frac{\lambda(\lambda t)^xe^{-\lambda t}}{x!}.$$
+Let $p_{x+1}(t)=u(t)e^{-\int\lambda dt}=u(t)e^{-\lambda t}$,
+$$u'(t)=\frac{\frac{\lambda(\lambda t)^xe^{-\lambda t}}{x!}}{e^{-\int\lambda dt}}=\frac{\lambda(\lambda t)^x}{x!}.$$
+$$p_{x+1}(t)=e^{-\lambda t}\int u'(t)dt=e^{-\lambda t}\int\frac{\lambda(\lambda t)^x}{x!}dt=e^{-\lambda t}\frac{1}{(x+1)\lambda}\frac{\lambda(\lambda t)^{x+1}}{x!}=\frac{(\lambda t)^{x+1}e^{-\lambda t}}{(x+1)!},$$
+which satisfy the formula of $p_x(t)$.
 
-
+So it is proved by induction.
 
 \end{document}
 
