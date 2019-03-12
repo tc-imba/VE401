@@ -70,10 +70,36 @@ When $x=x+1$,
 $$p_{x+1}'(t)+\lambda p_{x+1}(t)=\lambda p_x(t)=\frac{\lambda(\lambda t)^xe^{-\lambda t}}{x!}.$$
 Let $p_{x+1}(t)=u(t)e^{-\int\lambda dt}=u(t)e^{-\lambda t}$,
 $$u'(t)=\frac{\frac{\lambda(\lambda t)^xe^{-\lambda t}}{x!}}{e^{-\int\lambda dt}}=\frac{\lambda(\lambda t)^x}{x!}.$$
-$$p_{x+1}(t)=e^{-\lambda t}\int u'(t)dt=e^{-\lambda t}\int\frac{\lambda(\lambda t)^x}{x!}dt=e^{-\lambda t}\frac{1}{(x+1)\lambda}\frac{\lambda(\lambda t)^{x+1}}{x!}=\frac{(\lambda t)^{x+1}e^{-\lambda t}}{(x+1)!},$$
+$$p_{x+1}(t)=e^{-\lambda t}\int u'(t)dt=e^{-\lambda t}\int\frac{\lambda(\lambda t)^x}{x!}dt=e^{-\lambda t}\frac{1}{(x+1)\lambda}\frac{\lambda(\lambda t)^{x+1}}{x!}=\frac{(\lambda t)^{x+1}                                                                                                                                                                                                                              e^{-\lambda t}}{(x+1)!},$$
 which satisfy the formula of $p_x(t)$.
 
 So it is proved by induction.
+
+\subsection{Poisson Approximation to the Binomial Distribution}
+
+$$f(x)=\binom{n}{x}p^x(1-p)^{n-x}=\frac{n!}{x!(n-x)!}\left(\frac{k}{n}\right)^x\left(1-\frac{k}{n}\right)^{n-x}.$$
+$$\lim_{n\to\infty}\frac{n!}{(n-x)!}=\lim_{n\to\infty}\prod_{k=0}^{x-1}(n-k)=n^x.$$
+$$\lim_{n\to\infty}n\ln\left(1-\frac{k}{n}\right)=\lim_{n\to\infty}\frac{\ln\left(1-\frac{k}{n}\right)}{\frac{1}{n}}=\lim_{n\to\infty}\frac{\frac{1}{1-\frac{k}{n}}\cdot\frac{k}{n^2}}{-\frac{1}{n^2}}=-k,$$
+$$\lim_{n\to\infty}\left(1-\frac{k}{n}\right)^{n-x}=\lim_{n\to\infty}\left(1-\frac{k}{n}\right)^n=\exp\left[{\lim_{n\to\infty}n\ln\left(1-\frac{k}{n}\right)}\right]=e^{-k}.$$
+So $$\lim_{n\to\infty}f(x)=\frac{n!k^x}{x!(n-x)!n^x}\left(1-\frac{k}{n}\right)^{n-x}=\frac{k^xe^{-k}}{x!}.$$
+
+\subsection{Maxwell-Boltzmann Statistics}
+Let $$k_0=-\frac{m}{2kT},\quad k_1=\left(\frac{2}{\pi}\right)^{1/2}\left(\frac{m}{kT}\right)^{3/2},$$
+when $v>0$,
+$$f_V(v)=k_1v^2e^{-k_0v^2/2}.$$
+\begin{enumerate}[label=\roman*)]
+\item
+\begin{align*}
+E[V]&=\int_0^{+\infty}v\cdot f_V(v)dv=k_1\int_0^{+\infty}v^3e^{k_0v^2}dv\\
+&=\frac{k_1}{2k_0}\int_0^{+\infty}v^2d(e^{k_0v^2})\\
+&=\frac{k_1}{2k_0}\int_0^{+\infty}\frac{\ln(e^{k_0v^2})}{k_0}d(e^{k_0v^2})\\
+&=\frac{k_1}{2k_0^2}\cdot\left.\frac{1}{e^{k_0v^2}}\right|_0^{+\infty}=-\frac{k_1}{2k_0^2}\\
+&=-2\left(\frac{2}{\pi}\right)^{1/2}\left(\frac{m}{kT}\right)^{-1/2}
+\end{align*}
+\begin{align*}
+E[V^2]&=\int_0^{+\infty}v^2\cdot f_V(v)dv=k_1\int_0^{+\infty}v^4e^{k_0v^2}dv\\
+\end{align*}
+\end{enumerate}
 
 \end{document}
 
