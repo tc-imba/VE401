@@ -158,9 +158,9 @@ P[5800\leqslant X\leqslant 5900]&=P\left[\frac{5800-6000}{100}\leqslant\frac{X-\
 \end{align*}
 \item
 When $x_0$ is exceeded by 95\% of the samples,
-$$P[X<x_0]=P\left[\frac{X-\mu}{\sigma}<\frac{x_0-6000}{100}\right]=P[Z<0.01x_0-60]=\Phi(0.01x_0-60)\geqslant 0.95,$$
-$$0.01x_0-60\geqslant\Phi^{-1}(0.95)\approx1.65,$$
-$$x_0\gtrapprox6165{\rm~kg/cm^3}.$$
+$$P[X<x_0]=P\left[\frac{X-\mu}{\sigma}<\frac{x_0-6000}{100}\right]=P[Z<0.01x_0-60]=\Phi(0.01x_0-60)\leqslant 0.05,$$
+$$0.01x_0-60\leqslant\Phi^{-1}(0.95)\approx-1.65,$$
+$$x_0\lessapprox5835{\rm~kg/cm^3}.$$
 \end{enumerate}
 
 \subsection{Continuous Uniform Distribution}
@@ -200,11 +200,26 @@ Let $X$ be the number of errors in a random sample of 50 pages, then
 $$P[X>0]=1-P[X=0]=1-\left(\frac{150}{200}\right)^5=\frac{781}{1024}.$$
 \item
 Let $k$ be the random sample size to assure that at least three errors will be found with 90\% probability, then
-$$n=200,\quad p=\frac{5k}{200}=\frac{k}{40}.$$
-$$P[X\leqslant 2]\approx\Phi\left(\frac{2+1/2-np}{\sqrt{np(1-p)}}\right)=\Phi\left(\frac{2+1/2-5k}{\sqrt{5k(1-k/40)}}\right)\leqslant0.1.$$
-$$\frac{2+1/2-5k}{\sqrt{5k(1-k/40)}}\leqslant\Phi^{-1}(0.1)=-1.28.$$
-$$(2.5-5k)^2\geqslant1.28^2\cdot5k(1-k/40),\quad 2.5-5k\leqslant 0.$$
+$$n=5,\quad p=\frac{k}{200}.$$
+$$P[X\leqslant 2]\approx\Phi\left(\frac{2+1/2-np}{\sqrt{np(1-p)}}\right)=\Phi\left(\frac{2+1/2-k/40}{\sqrt{k/40(1-k/200)}}\right)\leqslant0.1.$$
+$$\frac{2+1/2-k/40}{\sqrt{k/40(1-k/200)}}\leqslant\Phi^{-1}(0.1)=-1.28.$$
+$$(2.5-k/40)^2\geqslant1.28^2\cdot k/40(1-k/200),\quad 2.5-k/40\leqslant 0.$$
+$$k\gtrapprox 149.68.$$
+So the sample size should be at least 150.
+\end{enumerate}
 
+\subsection{Reliability of a System}
+\begin{enumerate}[label=\roman*)]
+\item 
+$$R_1(t)=\exp\left[-\int_0^t\alpha_1\beta_1 x^{\beta_1-1}dx\right]=e^{-\alpha_1 t^{\beta_1}},$$
+$$R_2(t)=\exp\left[-\int_0^t\beta_2 dx\right]=e^{-\beta_2 t},$$
+$$R_s(t)=R_1(t)R_2(t)=e^{-\alpha_1t^{\beta_1}-\beta_2 t}.$$
+$$R_s(2500)=e^{-0.006\cdot2500^{0.5}-1/25000\cdot2500}=e^{-0.4}\approx0.670.$$
+\item
+$$P[t<2000]=1-R_s(2000)=1-e^{-0.006\cdot2000^{0.5}-1/25000\cdot2000}\approx0.294.$$
+\item
+$$R_p(t)=1-(1-R_1(t))(1-R_2(t))=1-(1-e^{-\alpha_1 t^{\beta_1}})(1-e^{-\beta_2 t}).$$
+$$R_p(2500)=1-(1-e^{-0.006\cdot2500^{0.5}})(1-e^{-1/25000\cdot2500})=e\approx0.975.$$
 \end{enumerate}
 
 \end{document}
