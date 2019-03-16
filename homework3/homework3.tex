@@ -23,8 +23,76 @@
 
 \maketitle
 
+\subsection{}
 
+\begin{enumerate}[label=\roman*)]
+\item
+From the definition of $f_{XY}(x,y)$, we know $f_{XY}(x,y)\geqslant0$ for all $(x,y)\in\Omega$, and
+$$\sum_{(x,y)\in\Omega}f_{XY}(x,y)=\sum_{x=1}^n\sum_{y=x}^n\frac{2}{n(n+1)}=\sum_{x=1}^nx\frac{2}{n(n+1)}=\frac{n(n+1)}{2}\cdot\frac{2}{n(n+1)}=1.$$
+So $f_{XY}$ is in fact a density.
+\item
+\begin{align*}
+f_X(x)&=\sum_yf_{XY}(x,y)=\sum_{y=x}^n\frac{2}{n(n+1)}=\frac{2(n+1-x)}{n(n+1)},\\
+f_Y(y)&=\sum_xf_{XY}(x,y)=\sum_{x=1}^y\frac{2}{n(n+1)}=\frac{2y}{n(n+1)}.
+\end{align*}
+\item
+$$f_X(x)f_Y(y)=\frac{4(n+1-x)y}{n^2(n+1)^2},$$
+$$f_{XY}(n,1)=\frac{2}{n(n+1)}\neq f_X(n)f_Y(1)=\frac{4}{n^2(n+1)^2}.$$
+So $X$ and $Y$ are not independent.
+\item
+\begin{align*}
+P[X\leqslant3{\rm\ and\ }Y\leqslant2]&=\sum_{x=1}^3\sum_{y=x}^2f_{XY}(x,y)=\sum_{x=1}^3\sum_{y=x}^2\frac{2}{n(n+1)}=3\cdot\frac{2}{5\cdot(5+1)}=\frac{1}{5},\\
+P[X\leqslant3]&=\sum_{x=1}^3f_X(x)=\sum_{x=1}^3\frac{2(n+1-x)}{n(n+1)}=(5+4+3)\cdot\frac{2}{5\cdot(5+1)}=\frac{4}{5},\\
+P[Y\leqslant2]&=\sum_{y=1}^2f_Y(y)=\sum_{y=1}^2\frac{2y}{n(n+1)}=(1+2)\cdot\frac{2}{5\cdot(5+1)}=\frac{1}{5}.
+\end{align*}
+\end{enumerate}
 
+\subsection{The Sum of Two Continuous Random Variables}
+
+Consider the transformation 
+$$\varphi(X,Y)\mapsto (U,V)$$
+where
+$$\varphi(x,y)=\binom{x+y}{y}.$$
+Then
+$$\varphi^{-1}(u,v)=\binom{u-v}{v}.$$
+We calculate
+$$D\varphi^{-1}(u,v)=\begin{pmatrix}
+\frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+\frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \\
+\end{pmatrix}=\begin{pmatrix}
+1 & -1 \\ 0 & 1 \\
+\end{pmatrix},$$
+so
+$$\left|\frac{\partial(x,y)}{\partial(u,v)}\right||\det D\varphi^{-1}(u,v)|=1.$$
+Then
+$$f_{UV}(u,v)=f_{XY}(x,y)|\det D\varphi^{-1}(u,v)|=f_{XY}(x,y).$$
+The marginal density $f_U$ is given by
+$$f_U(u)=\int_{-\infty}^\infty f_{UV}(u,v)dv=\int_{-\infty}^\infty f_{XY}(x,y)dy=\int_{-\infty}^\infty f_{XY}(u-v,v)dv.$$
+
+\subsection{The Sum of Two Exponential Distributions}
+Let
+$$f_X(x)=\left\{\begin{aligned}
+&\beta_1e^{-\beta_1x}=\frac{1}{3}e^{-x/3} &\quad x>0 \\
+&0 &\quad x\leqslant 0
+\end{aligned}\right.,\quad
+f_Y(y)=\left\{\begin{aligned}
+&\beta_2e^{-\beta_2y}=e^{-y} &\quad x>0 \\
+&0 &\quad x\leqslant 0
+\end{aligned}\right.,$$
+and
+$$f_{XY}(x,y)=f_X(x)f_Y(y)=\left\{\begin{aligned}
+&\frac{1}{3}e^{-x/3-y} &\quad x>0 \\
+&0 &\quad x\leqslant 0
+\end{aligned}\right..$$
+According to Exercise 3.2,
+$$f_U(u)=\int_{-\infty}^\infty f_{XY}(u-v,v)dv.$$
+When $u,v>0$, $u-v>0$, we can get $0<v<u$, then
+$$f_U(u)=\int_0^u\frac{1}{3}e^{-(u-v)/3-v}dv=\frac{1}{3}e^{-u/3}\int_0^u e^{-2v/3}dv=\frac{1}{3}e^{-u/3}\cdot-\frac{3}{2}e^{-2v/3}\bigg|_0^u=\frac{1}{2}(e^{-u/3}-e^{-u}).$$
+When $u,v\leqslant0$, $f_U(u)=0$, so
+$$f_U(u)=\left\{\begin{aligned}
+&\frac{1}{2}(e^{-u/3}-e^{-u}) &\quad u>0 \\
+&0 &\quad u\leqslant 0
+\end{aligned}\right..$$
 \end{document}
 
 
