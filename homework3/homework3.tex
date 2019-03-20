@@ -115,8 +115,8 @@ According to the uniqueness of moment generating function and Theorem 1.3.10, we
 First we can standardize $X_1$ and $X_2$ by
 $$X=\frac{X_1-\mu_1}{\sigma_1},Y=\frac{X_2-\mu_2}{\sigma_2},$$
 so that $X=\varphi_1\circ X_1$, $Y=\varphi_2\circ X_2$, where 
-$$\varphi_1:R\mapsto R,\quad \varphi_1(x)=\frac{x-\mu_1}{\sigma_1},$$
-$$\varphi_2:R\mapsto R,\quad \varphi_2(y)=\frac{y-\mu_2}{\sigma_2},$$
+$$\varphi_1:R\mapsto R,\quad \varphi_1(x_1)=\frac{x_1-\mu_1}{\sigma_1},\quad\varphi_1^{-1}(x)=\sigma_1x+\mu_1$$
+$$\varphi_2:R\mapsto R,\quad \varphi_2(x_2)=\frac{x_2-\mu_2}{\sigma_2},\quad\varphi_2^{-1}(y)=\sigma_2y+\mu_2$$
 according to Theorem 1.3.13, and since $\varphi_1$ and $\varphi_2$ are single variables maps,
 \begin{align*}
 f_{XY}(x,y)&=f_{X_1X_2}(\varphi_1^{-1}(x),\varphi_2^{-2}(y))\cdot\left|\frac{d\varphi_1^{-1}(x)}{dx}\right|\cdot\left|\frac{d\varphi_2^{-1}(y)}{dy}\right|\\
@@ -159,6 +159,60 @@ For a bivariate random variable with an arbitrary distribution, it's not true. C
 $${\rm Cov}(X,Y)=E((X-\mu_x)(Y-\mu_y))=\frac{1}{3}(-1+0+1)=0,$$
 $$\varrho=\frac{{\rm Cov}(X,Y)}{\sigma_x\sigma_y}=0.$$
 However, in the example there is a bijection between $X$ and $Y$, they are not independent.
+\item
+$$f_{Y|x}(y)=\frac{f_{XY}(x,y)}{f_X(x)}=\frac{\frac{1}{2\pi\sqrt{1-\varrho^2}}\exp\left[-\frac{x^2-2\varrho xy+y^2}{2(1-\varrho^2)}\right]}{\frac{1}{\sqrt{2\pi}}e^{-x^2/2}}=\frac{1}{\sqrt{2\pi}\sqrt{1-\varrho^2}}\exp\left[-\frac{1}{2}\left(\frac{y-\varrho x}{\sqrt{1-\varrho^2}}\right)^2\right].$$
+So $f_{Y|x}(y)$ follows a normal distribution with mean $\varrho x$ and variance $\sqrt{1-\varrho^2}$, $\mu_{Y|x}=\varrho x$. Then we can apply a inverse transformation with $\varphi_1$ and $\varphi_2$,
+$$f_{X_2|x_1}(x_2)=f_{Y|x}(\varphi_2(x_2))\cdot\left|\frac{d\varphi_2(x_2)}{dx_2}\right|=\frac{1}{\sqrt{2\pi}\sigma_2\sqrt{1-\varrho^2}}\exp\left[-\frac{1}{2}\left(\frac{x_2-\mu_2-\varrho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1)}{\sigma_2\sqrt{1-\varrho^2}}\right)^2\right].$$
+So $f_{X_2|x_1}(x_2)$ follows a normal distribution with mean $\mu_2+\varrho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1)$ and variance $\sigma_2\sqrt{1-\varrho^2}$,
+$$\mu_{X_2|x_1}=\mu_2+\varrho\frac{\sigma_2}{\sigma_1}(x_1-\mu_1).$$
+\item
+According to the symmetric of $X_1$ and $X_2$, $f_{X_1|x_2}(x_1)$ follows a normal distribution with mean $\mu_1+\varrho\frac{\sigma_1}{\sigma_2}(x_2-\mu_2)$ and variance $\sigma_1\sqrt{1-\varrho^2}$, so
+$$\mu_{X_1|x_2}=\mu_1+\varrho\frac{\sigma_1}{\sigma_2}(x_2-\mu_2)=2000+0.87\cdot\frac{\sqrt{2500}}{\sqrt{0.01}}\cdot(0.098-0.1)=1999.19{\rm~inch},$$
+$$\sigma_{X_1|x_2}=\sigma_1\sqrt{1-\varrho^2}=\sqrt{2500}\cdot\sqrt{1-0.87^2}\approx24.65{\rm~inch},$$
+$$P[X_1|x_2\geqslant1950]=P\left[Z\geqslant\frac{X_1|x_2-\mu_{X_1|x_2}}{\sigma_{X_1|x_2}}\right]\approx P\left[Z\geqslant\frac{1950-1999.19}{24.65}\right]\approx 1-\Phi(-1.996)\approx0.977.$$
+\end{enumerate}
+
+\subsection{Bivariate Normal Distribution as a Mixture of Independent Normal Distributions}
+
+Let $$A=\begin{pmatrix}a_1 & b_1 \\a_2 & b_2\end{pmatrix},$$
+then $$AX=\begin{pmatrix}
+a_1X_1 + b_1X_2 \\
+a_2X_1 + b_2X_2
+\end{pmatrix}.$$
+
+\begin{enumerate}[label=\roman*)]
+\item
+$$E[AX]=\begin{pmatrix}
+E[a_1X_1 + b_1X_2]\\
+E[a_2X_1 + b_2X_2]
+\end{pmatrix}=\begin{pmatrix}
+a_1E[X_1] + b_1E[X_2]\\
+a_2E[X_1] + b_2E[X_2]
+\end{pmatrix}=AE[X].$$
+\item
+Let
+\begin{align*}
+M&={\rm Var}[a_1X_1 + b_1X_2]=a_1^2{\rm Var}[X_1]+2a_1b_1{\rm Cov}(X_1,X_2)+b_1^2{\rm Var}[X_2],\\
+N&={\rm Cov}(a_1X_1 + b_1X_2,a_2X_1 + b_2X_2)\\
+&=E[(a_1X_1 + b_1X_2)(a_2X_1 + b_2X_2)]-E[a_1X_1 + b_1X_2]E[a_2X_1 + b_2X_2]\\
+&=a_1a_2E[X_1^2]+(a_1b_2+a_2b_1)E[X_1X_2]+b_1b_2E[X_2^2]\\
+&\quad-a_1a_2E[X_1]^2-(a_1b_2+a_2b_1)E[X_1]E[X_2]-b_1b_2E[X_2]^2\\
+&=a_1a_2{\rm Var}[X_1]+(a_1b_2+a_2b_1){\rm Cov}(X_1,X_2)+b_1b_2{\rm Var}[X_2].\\
+P&={\rm Var}[a_2X_1 + b_2X_2]=a_2^2{\rm Var}[X_1]+2a_2b_2{\rm Cov}(X_1,X_2)+b_2^2{\rm Var}[X_2].
+\end{align*}
+\begin{align*}
+{\rm Var}[AX]&=\begin{pmatrix}
+{\rm Var}[a_1X_1 + b_1X_2] & {\rm Cov}(a_1X_1 + b_1X_2,a_2X_1 + b_2X_2)\\
+{\rm Cov}(a_2X_1 + b_2X_2,a_1X_1 + b_1X_2) & {\rm Var}[a_2X_1 + b_2X_2]
+\end{pmatrix}\\
+&=\begin{pmatrix}
+M & N \\ N & P
+\end{pmatrix}\\
+&=\begin{pmatrix}a_1 & b_1 \\a_2 & b_2\end{pmatrix}
+\begin{pmatrix}{\rm Var}[X_1] & {\rm Cov}(X_1,X_2) \\ {\rm Cov}(X_2,X_1) & {\rm Var}[X_2] \end{pmatrix}
+\begin{pmatrix}a_1 & a_2 \\b_1 & b_2\end{pmatrix}\\
+&=A{\rm Var}[X]A^T,
+\end{align*}
 \item
 
 \end{enumerate}
