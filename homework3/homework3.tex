@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper]{article}
 
 \usepackage{../ve401}
+\usepackage{graphicx}
 
 \author{Group 37}
 \semester{Spring}
@@ -175,7 +176,7 @@ $$P[X_1|x_2\geqslant1950]=P\left[Z\geqslant\frac{X_1|x_2-\mu_{X_1|x_2}}{\sigma_{
 \subsection{Bivariate Normal Distribution as a Mixture of Independent Normal Distributions}
 
 Let $$A=\begin{pmatrix}a_1 & b_1 \\a_2 & b_2\end{pmatrix},$$
-then $$AX=\begin{pmatrix}
+then $$Y=AX=\begin{pmatrix}
 a_1X_1 + b_1X_2 \\
 a_2X_1 + b_2X_2
 \end{pmatrix}.$$
@@ -214,9 +215,145 @@ M & N \\ N & P
 &=A{\rm Var}[X]A^T,
 \end{align*}
 \item
-
+Since
+$$\Sigma_X=\begin{pmatrix}
+\sigma_1^2 & 0 \\ 0 & \sigma_2^2
+\end{pmatrix},$$
+we can get
+$$\Sigma^{-1}_X=\begin{pmatrix}
+\frac{1}{\sigma_1^2} & 0 \\ 0 & \frac{1}{\sigma_2^2}
+\end{pmatrix},\quad \det\Sigma_X=\sigma_1^2\sigma_2^2,$$
+$$\left\langle x-\mu_x, \Sigma^{-1}_X (x-\mu_x) \right\rangle=
+\begin{pmatrix}x_1-\mu_1 & x_2-\mu_2\end{pmatrix}
+\left[\begin{pmatrix}\frac{1}{\sigma_1^2} & 0 \\ 0 & \frac{1}{\sigma_2^2}\end{pmatrix}
+\begin{pmatrix}x_1-\mu_1 \\ x_2-\mu_2\end{pmatrix}\right]
+=\frac{(x_1-\mu_1)^2}{\sigma_1^2}+\frac{(x_2-\mu_2)^2}{\sigma_2^2}.
+$$
+And since $X_1$ and $X_2$ are independent,
+\begin{align*}
+f_X(x)&=f_X(x_1,x_2)=f_{X_1}(x_1)f_{X_2}(x_2)\\
+&=\frac{1}{2\pi\sigma_1\sigma_2}\exp\left[-\frac{1}{2}\left(\frac{(x_1-\mu_1)^2}{\sigma_1^2}+\frac{(x_2-\mu_2)^2}{\sigma_2^2}\right)\right]\\
+&=\frac{1}{2\pi\sqrt{\det\Sigma_X}}\exp\left[-\frac{1}{2}\left\langle x-\mu_x, \Sigma^{-1}_X (x-\mu_x) \right\rangle\right].
+\end{align*}
+\item
+According to i) and ii),
+$$\mu_y=A\mu_x,\quad \Sigma_Y={\rm Var}[Y]=A{\rm Var}[X]A^T=A\Sigma_XA^T.$$
+Then
+$$\det\Sigma_Y=\det(A\Sigma_XA^T)=(\det A)^2\det\Sigma_X,$$
+$$\Sigma_Y^{-1}=(A^{-1})^T\Sigma_X^{-1}A^{-1},$$
+\begin{align*}
+\left\langle x-\mu_x, \Sigma^{-1}_X (x-\mu_x) \right\rangle
+&=\left\langle A^{-1}y-A^{-1}\mu_y, \Sigma^{-1}_X (A^{-1}y-A^{-1}\mu_y) \right\rangle\\
+&=(A^{-1}(y-\mu_y))^T\Sigma^{-1}_X A^{-1}(y-\mu_y)\\
+&=(y-\mu_y)^T(A^{-1})^T\Sigma^{-1}_X A^{-1}(y-\mu_y)\\
+&=\left\langle y-\mu_y, \Sigma^{-1}_Y (y-\mu_y) \right\rangle.
+\end{align*}
+With the inverse transformation of $A$, we obtain
+\begin{align*}
+f_Y(y)&=f_X(A^{-1}y)|\det A^{-1}|\\
+&=\frac{1}{2\pi\sqrt{\det\Sigma_X}}\exp\left[-\frac{1}{2}\left\langle x-\mu_x, \Sigma^{-1}_X (x-\mu_x) \right\rangle\right]\cdot\frac{1}{|\det A|}\\
+&=\frac{1}{2\pi\sqrt{\det\Sigma_X(\det A)^2}}\exp\left[-\frac{1}{2}\left\langle A^{-1}y-A^{-1}\mu_y, \Sigma^{-1}_X (A^{-1}y-A^{-1}\mu_y) \right\rangle\right]\\
+&=\frac{1}{2\pi\sqrt{|\det\Sigma_Y}|}\exp\left[-\frac{1}{2}\left\langle y-\mu_y, \Sigma^{-1}_Y (y-\mu_y) \right\rangle\right].
+\end{align*}
+\item
+$$|\det\Sigma_Y|=|{\rm Var}[Y_1]{\rm Var}[Y_2]-{\rm Cov}[Y_1,Y_2]|^2=|\sigma_{Y_1}^2\sigma_{Y_2}^2-{\rm Cov}[Y_1,Y_2]^2|,$$
+$$\sqrt{|\det\Sigma_Y|}=\sigma_{Y_1}\sigma_{Y_2}\sqrt{1-\frac{{\rm Cov}[Y_1,Y_2]^2}{\sigma_{Y_1}^2\sigma_{Y_2}^2}}=\sigma_{Y_1}\sigma_{Y_2}\sqrt{1-\varrho^2}.$$
+Then we can write
+$$\Sigma_Y=\begin{pmatrix}
+\sigma_{Y_1}^2 & \varrho\sigma_{Y_1}\sigma_{Y_2} \\
+\varrho\sigma_{Y_1}\sigma_{Y_2} & \sigma_{Y_2}^2
+\end{pmatrix},\quad\Sigma_Y^{-1}=\frac{1}{\sqrt{1-\varrho^2}}\begin{pmatrix}
+\frac{1}{\sigma_{Y_1}^2} & \frac{\varrho}{\sigma_{Y_1}\sigma_{Y_2}} \\
+\frac{\varrho}{\sigma_{Y_1}\sigma_{Y_2}} & \frac{1}{\sigma_{Y_2}^2}
+\end{pmatrix},$$
+and
+\begin{align*}
+&\left\langle y-\mu_y, \Sigma^{-1}_Y (y-\mu_y) \right\rangle\\
+=&\frac{1}{\sqrt{1-\varrho^2}}
+\begin{pmatrix}y_1-\mu_{Y_1} & y_2-\mu_{Y_2}\end{pmatrix}
+\left[\begin{pmatrix}
+\frac{1}{\sigma_{Y_1}^2} & \frac{\varrho}{\sigma_{Y_1}\sigma_{Y_2}} \\
+\frac{\varrho}{\sigma_{Y_1}\sigma_{Y_2}} & \frac{1}{\sigma_{Y_2}^2}
+\end{pmatrix}
+\begin{pmatrix}y_1-\mu_{Y_1} \\ y_2-\mu_{Y_2}\end{pmatrix}
+\right]\\
+=&\frac{1}{\sqrt{1-\varrho^2}}\left[\left(\frac{y_1-\mu_{Y_1}}{\sigma_{Y_1}}\right)^2-2\varrho\left(\frac{y_1-\mu_{Y_1}}{\sigma_{Y_1}}\right)\left(\frac{y_2-\mu_{Y_2}}{\sigma_{Y_2}}\right)+\left(\frac{y_2-\mu_{Y_2}}{\sigma_{Y_2}}\right)^2\right].
+\end{align*}
+So $f_Y(y)$ can be written as
+\begin{footnotesize}
+$$f_Y(y_1,y_2)=\frac{1}{2\pi\sigma_{Y_1}\sigma_{Y_2}\sqrt{1-\varrho^2}}\exp\left\{-\frac{1}{2(1-\varrho^2)}\left[\left(\frac{y_1-\mu_{Y_1}}{\sigma_{Y_1}}\right)^2-2\varrho\left(\frac{y_1-\mu_{Y_1}}{\sigma_{Y_1}}\right)\left(\frac{y_2-\mu_{Y_2}}{\sigma_{Y_2}}\right)+\left(\frac{y_2-\mu_{Y_2}}{\sigma_{Y_2}}\right)^2\right]\right\}.$$
+\end{footnotesize}
 \end{enumerate}
 
-\end{document}
+\subsection{}
 
+\includegraphics[width=\linewidth]{ex3_7.pdf}
+
+\begin{enumerate}[label=\roman*)]
+\item\ \\
+\includegraphics[width=0.8\linewidth]{ex3_7_1.pdf}
+
+We can find that the shape of the stem-and-leaf graph seems like a normal  distribution.
+\item\ \\
+\includegraphics[width=0.8\linewidth]{ex3_7_2.pdf}
+
+The shape of the histogram seems like a normal distribution, which is the same as the stem-and-leaf graph shows.
+\item\ \\
+\includegraphics[width=\linewidth]{ex3_7_3.pdf}
+
+We can find only one near outlier in the box plot, which shows that the data is very probably follow a normal distribution. It gives a more precise descriptive statistics than the stem-and-leaf graph.
+\end{enumerate}
+
+\subsection{}
+$$L(\gamma)=\prod_{i=1}^nf(x_i)=\prod_{i=1}^n(\gamma+1)X_i^\gamma=(\gamma+1)^n\prod_{i=1}^nX_i^\gamma.$$
+We want to find the value of $\gamma$ to maximize $L(\gamma)$, first we can take the logarithm on both sides, so that
+$$\ln L(\gamma)=n\ln(\gamma+1)+\gamma\sum_{i=1}^n\ln X_i.$$
+Maximizing $\ln L(\gamma)$ will also maximize $L(\gamma)$, so we take the first derivative and set it equal to zero:
+$$\frac{d\ln L(\gamma)}{d\gamma}=\frac{n}{\gamma+1}+\sum_{i=1}^n\ln X_i=0.$$
+The maximum likelihood estimator for $\gamma$ is
+$$\gamma=-\frac{n}{\sum_{i=1}^n\ln X_i}-1.$$
+
+\subsection{}
+
+$$f_X(x)=\binom{n}{x}p^x(1-p)^{n-x}=\binom{4}{x}p^x(1-p)^{4-x}.$$
+\begin{enumerate}[label=\roman*)]
+\item
+$$L(p)=\prod_i^nf_X(x_i)=f_X(0)^8\cdot f_X(1)^6\cdot f_X(2).$$
+$$f_X(0)=(1-p)^4,\quad f_X(1)=4p(1-p)^3,\quad f_X(2)=6p^2(1-p)^2.$$
+$$L(p)=(1-p)^{32}\cdot4^6p^6(1-p)^{18}\cdot6p^2(1-p)^2=6\cdot4^6p^8(1-p)^{52}.$$
+We want to find the value of $p$ to maximize $L(p)$, first we can take the logarithm on both sides, so that
+$$\ln L(p)=6\ln4+\ln6+8\ln p+52\ln (1-p).$$
+Maximizing $\ln L(p)$ will also maximize $L(p)$, so we take the first derivative and set it equal to zero:
+$$\frac{d\ln L(p)}{dp}=\frac{8}{p}-\frac{52}{1-p}=0,$$
+$$8-8p=52p\Longrightarrow p=\frac{2}{15}.$$
+The maximum likelihood estimate for $p$ is $2/15$.
+\item
+Since $2/15\approx13.3\%>10\%$, I would have some doubts concerning the use of this new material.
+\end{enumerate}
+
+\subsection{}
+According to Exercise 3.6, we know
+$$E[Y]=E[AX]=AE[X],\quad {\rm Var}[Y]={\rm Var}[AX]=A{\rm Var}[X]A^T.$$
+Since $X_1$ and $X_2$ both follow normal distributions with variance $\sigma^2$ and mean $\mu$,
+$${\rm Var}[X]=\begin{pmatrix}\sigma^2&0\\0&\sigma^2\end{pmatrix}=\sigma^2\begin{pmatrix}1&0\\0&1\end{pmatrix}=\sigma^2I_2.$$
+And since $A^T=A^{-1}$,
+$${\rm Var}[Y]=A{\rm Var}[X]A^T=A{\rm Var}[X]A^{-1}={\rm Var}[X],$$
+$${\rm Cov}(Y_1,Y_2)={\rm Cov}(X_1,X_2).$$
+According to Exercise 3.4, $Y_1$ and $Y_2$ follow normal distributions, and according to Exercise 3.5 iii), $Y_1$ and $Y_2$ are independent. The mean of $Y$ is $AE[X]$ and the variance of $Y$ is $\sigma^2 I_2$. 
+
+\subsection{}
+
+The length of the interval, $\sigma(z_{\alpha_1}+z_{\alpha_2})/\sqrt{n}$ is minimized if and only if $z_{\alpha_1}+z_{\alpha_2}$ is minimized. 
+
+By the definition of $z$ we know
+$$\phi(x)=\frac{1}{\sqrt{2\pi}}e^{-x^2/2},$$
+$$\int_{z_{\alpha/2}}^{z_{\alpha_1}}\phi(x)dx=\frac{\alpha}{2}-\alpha_1=\alpha_2-\frac{\alpha}{2}=\int^{z_{\alpha/2}}_{z_{\alpha_2}}\phi(x)dx.$$
+Without loss of generality, suppose $\alpha_1<\alpha/2<\alpha_2$, so that $$0<z_{\alpha_2}<z_{\alpha/2}<z_{\alpha_1}.$$
+Since $\phi(x)$ is a decreasing function, when $0<z_{\alpha_2}<z_{\alpha/2}<z_{\alpha_1}$, 
+$$\int_{z_{\alpha/2}}^{z_{\alpha_1}}\phi(x)dx<(z_{\alpha_1}-z_{\alpha/2})\phi(z_{\alpha/2}),$$
+$$\int^{z_{\alpha/2}}_{z_{\alpha_2}}\phi(x)dx>(z_{\alpha/2}-z_{\alpha_2})\phi(z_{\alpha/2}).$$
+So $$z_{\alpha/2}-z_{\alpha_2}<z_{\alpha_1}-z_{\alpha/2},$$
+$$z_{\alpha_1}+z_{\alpha_2}>2z_{\alpha/2},$$
+which means only when $\alpha_1=\alpha_2=\alpha/2$, $z_{\alpha_1}+z_{\alpha_2}$ is minimized.
+\end{document}
 
