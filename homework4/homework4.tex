@@ -25,15 +25,43 @@
 \maketitle
 
 \subsection{}
+$$1-\alpha=0.95\Longrightarrow a=0.05.$$
+A 95\% two sided confidence interval for $\sigma^2$ is
+$$\left[\frac{(n-1)s^2}{\chi^2_{\alpha/2,n-1}},\frac{(n-1)s^2}{\chi^2_{1-\alpha/2,n-1}}\right]=\left[\frac{50\cdot0.37^2}{71.420},\frac{50\cdot0.37^2}{32.357}\right]\approx0.09584,0.2115].$$
+So a 95\% two sided confidence interval for $\sigma$ is 
+$$[\sqrt{0.09584},\sqrt{0.2115}]\approx[0.31,0.46].$$
 
 \subsection{Non-Parametric Confidence Intervals}
 
 \begin{enumerate}[label=\roman*)]
 \item
+The median of a random variable $X$ is defined as
+$$P[X>M]=P[X<M]=\frac{1}{2}.$$
+Then
+\begin{align*}
+&P[X_{min}\leqslant M\leqslant X_{max}]\\
+=&1-P[X_{min}>M]-P[X_{max}<M]\\
+=&1-\prod_{i=1}^nP[X>M]-\prod_{i=1}^nP[X<M]\\
+=&1-\left(\frac{1}{2}\right)^{n-1}.
+\end{align*}
 \item
+\begin{align*}
+&P[X_{k+1}\leqslant M\leqslant X_{n-k}]\\
+=&1-P[X_{k+1}>M]-P[X_{n-k}<M]\\
+=&1-\sum_{i=0}^k\binom{n}{k}P[X_i\leqslant M]P[X_{i+1}>M]-\sum_{i=0}^k\binom{n}{k}P[X_{n-i+1}\geqslant M]P[X_{n-i}<M]\\
+=&1-\sum_{i=0}^k\binom{n}{k}\prod_{j=1}^iP[X\leqslant M]\prod_{j=i+1}^nP[X>M]-\sum_{i=0}^k\binom{n}{k}\prod_{j=n-i+1}^nP[X\geqslant M]\prod_{j=1}^{n-i}P[X<M]\\
+=&1-2\sum_{i=0}^k\binom{n}{k}\left(\frac{1}{2}\right)^n.
+\end{align*}
 \end{enumerate}
 
 \subsection{Fisher Test}
+We set up the null hypothesis $$H_0:\mu\leqslant25.$$
+Since there are only 20 samples, we should use the T-Test. According to the data, we obtain
+$$\overline{X}=26.035,\quad S=4.785.$$
+Therefore, the test statistic is
+$$T_{19}=\frac{\overline{X}-\mu_0}{S/\sqrt{n}}=\frac{26.035-25}{4.785/\sqrt{20}}\approx0.967,$$
+Then $$P[T_{19}\geqslant0.967\mid H_0]=1-P[T_{19}\leqslant0.967\mid H_0]=1-0.8272=0.1728.$$
+Since the P-value is not small enough, I can't support the claim.
 
 \subsection{Neyman-Pearson Decision Test}
 
