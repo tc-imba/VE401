@@ -67,9 +67,23 @@ Since the P-value is not small enough, I can't support the claim.
 
 \begin{enumerate}[label=\roman*)]
 \item
+$$\frac{\overline{X}-\mu_0}{\sigma/\sqrt{n}}\geqslant z_{\alpha},$$
+$$\frac{\overline{X}-4}{0.2/\sqrt{50}}\geqslant\Phi^{-1}(0.95)\approx1.645.$$
+The critical region is determined by
+$$\overline{X}>4.046.$$
 \item
+$$-z_{\beta}=z_\alpha-\delta\sqrt{n}/\sigma=-16.03,$$
+$$\beta=\Phi(-z_{\beta})\approx 0,$$
+$${\rm power}=1-\beta=1.$$
 \item
+$$1-\beta'\geqslant0.97\Longrightarrow\beta'<0.03,$$
+$$z_{\beta'}=-\Phi^{-1}(\beta')\gtrapprox 1.88,$$
+$$n\approx\frac{(z_\alpha+z_{\beta'})^2\sigma^2}{\delta^2}\gtrapprox\frac{(1.645+1.88)^2\cdot0.2^2}{0.5^2}=1.9881.$$
+So the required sample size is 2.
 \item
+Since $\overline{x}>4.046$, $H_0$ is rejected.
+$$\overline{x}-z_\alpha\frac{\sigma}{\sqrt{n}}=4.05-1.645\cdot\frac{0.2}{\sqrt{50}}\approx4.0035.$$
+So a 95\% confidence interval for $\mu$ is $\mu\geqslant4.0035$.
 \end{enumerate}
 
 \subsection{}
