@@ -44,10 +44,38 @@ This is a two tailed test, so using $\alpha=0.05$, we look up $z_{\alpha/2}=1.96
 $$Z_0=\frac{\overline{x_1}-\overline{x_2}}{\sqrt{\sigma_1^2/n_1+\sigma_2^2/n_2}}=\frac{-6}{\sqrt{9/10}}\approx-6.32.$$
 Since $|Z_0|>1.96$, we reject $H_0$ at a 5\% level of significance.
 \item
-Using $\beta=0.1$, we look up $z_\beta=1.28$. According to Theorem 2.5.4, 
-$$n\approx\frac{(z_{\alpha/2}+z_\beta)^2\sigma^2}{\delta^2}=\frac{(1.96+1.27)^2\cdot9/10}{14^2}\approx0.048.$$
+Using $\beta=0.1$, we look up $z_\beta=1.28$. Similar to Theorem 2.5.4, the relationship between $\delta$, $\alpha$, $\beta$ and $n$ with $\sigma_1$, $\sigma_2$ is given by
+$$-z_\beta\approx z_{\alpha/2}-\delta/\sqrt{\sigma_1^2/n+\sigma_2^2/n}=z_{\alpha/2}-\delta\sqrt{n}/\sqrt{\sigma_1^2+\sigma_2^2},$$
+$$n\approx\frac{(z_{\alpha/2}+z_\beta)^2(\sigma_1^2+\sigma_2^2)}{\delta^2}=\frac{(1.96+1.27)^2\cdot(9+9)}{14^2}\approx0.958.$$
 So the sample size should be at least 1 to obtain a power of 0.9 in this situation.
 \end{enumerate}
+
+\subsection{}
+%According to Theorem 2.9.7, since sample variances $S_1^2$ and $S_2^2$ are based on independent random samples of sizes $n_1$ and $n_2$, then the statistic $$F=\frac{S_2^2/\sigma_2^2}{S_1^2/\sigma_1^2}$$ follows an F-distribution with $n_2-1$ and $n_1-1$ degrees of freedom. Therefore
+%$$P[f_{1-\alpha/2,n_2-1,n_1-1}\leqslant F\leqslant f_{\alpha/2,n_2-1,n_1-2}]=1-\alpha,$$
+%then an $100(1-\alpha)\%$ confidence interval on the ratio $\sigma_1^2/\sigma_2^2$ is
+%$$\frac{s_1^2}{s_2^2}f_{1-\alpha/2,n_2-1,n_1-1}\leqslant\frac{\sigma_1^2}{\sigma_2^2}\leqslant \frac{s_1^2}{s_2^2}f_{\alpha/2,n_2-1,n_1-2}.$$
+%When $n_1=10$, $s_1=4.7$, $n_2=16$, $s_2=5.8$, $\alpha=0.05$, we can obtain
+%$$\frac{s_1^2}{s_2^2}f_{0.975,15,9}\leqslant\frac{\sigma_1^2}{\sigma_2^2}\leqslant\frac{s_1^2}{s_2^2}f_{0.025,15,9},$$
+%$$\frac{4.7^2}{5.8^2}\cdot0.32\leqslant\frac{\sigma_1^2}{\sigma_2^2}\leqslant\frac{4.7^2}{5.8^2}\cdot3.77$$
+%$$0.458\leqslant\frac{\sigma_1}{\sigma_2}\leqslant1.573$$
+
+Suppose that we wish to test
+$$H_0:\sigma_1^2=\sigma_2^2\quad,\quad H_1:\sigma_1^2\neq\sigma_2^2$$
+Since $n_1=10$, $s_1=4.7$, $n_2=16$, $s_2=5.8$, $\alpha=0.05$, and
+$$f_0=\frac{s_1^2}{s_2^2}=\frac{4.7^2}{5.8^2}\approx0.657.$$
+We will reject $H_0$ if $f_0>f_{\alpha/2,n_1-1,n_2-1}=f_{0.025,9,15}=3.12$ or $f_0<f_{1-\alpha/2,n_1-1,n_2-1}=f_{0.975,9,15}=0.27$. Since 
+$$0.27<f_0<3.12,$$
+we cannot reject $H_0$, there isn't sufficient evidence to conclude that the two population variances differ by at least 0.5 grams per liter.
+
+\subsection{}
+Suppose that we wish to test
+$$H_0:\sigma_1^2=\sigma_2^2\quad,\quad H_1:\sigma_1^2\neq\sigma_2^2$$
+According to the data, $n_1=10$, $s_1^2=1.477\times10^{-3}$, $n_2=12$, $s_2^2=1.196\times10^{-2}$, and 
+$$f_0=\frac{s_1^2}{s_2^2}=\frac{1.477\times10^{-3}}{1.196\times10^{-2}}\approx0.123.$$
+We will reject $H_0$ if $f_0>f_{\alpha/2,n_1-1,n_2-1}=f_{\alpha/2,9,11}$ or $f_0<f_{1-\alpha/2,n_1-1,n_2-1}=f_{1-\alpha/2,9,11}$. Since $f_0$ is relatively small, we only consider $f_0<f_{1-\alpha/2,9,11}$,
+$$1-\alpha/2=P[F_{9,11}<f_{1-\alpha/2,9,11}],$$
+When $\alpha<0.004$, $f_0>f_{1-\alpha/2,9,11}$, so the P-value of the test is 0.004. The conclusion is that we can reject $H_0$ at at significance level 0.4\%, there is very much evidence to reject $H_0$.
 
 
 \end{document}
