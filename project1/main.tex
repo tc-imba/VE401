@@ -1,0 +1,662 @@
+\documentclass[conf]{new-aiaa}
+
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{geometry}
+
+
+\usepackage{float}
+\usepackage{diagbox}
+\usepackage[table,xcdraw]{xcolor}
+
+\usepackage{siunitx}
+\usepackage{longtable,tabularx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{minted}
+\usemintedstyle{autumn}
+\setminted{linenos,breaklines,tabsize=4,xleftmargin=1.5em}
+
+\title{VE401 Term Project 1\\
+Rules of metrological testing for net quantity of products in prepackage with fixed content}
+\author{Group 34\\
+Jing Wang (517370910133), 
+Yichao Yuan (517370910233),
+Yihao Liu (515370910207), \\
+Yimin Jiang (517370910111) and
+Zhihao Ma (516370910039) \footnote{Authors' names are in alphabet order.}
+}
+\affil{University OF Michigan - Shanghai Jiao Tong University Joint Institute, Shanghai, China}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    In this report, we mainly analyze the theoretical gist for the regulation issued by the Chinese government for testing whether the nominal content of prepackaged food is labelled correctly. By applying the knowledge of confidence interval, Neyman-Pearson hypothesis test, and with the help of OC curves, we investigate the producer's risk and customer's risk of the rules. We conclude that the requirement of the test is generally achieved by the criteria, additionally, protecting producers' interests are considered in the first place. Finally, we applied the rules to determine whether an actual batch of milk chocolate is accord with the standard.
+\end{abstract}
+
+\vspace{11cm}
+\noindent Keywords: Consumer's and Producer's risk, Confidence Interval, Neyman-Pearson Hypothesis Test, OC Curves
+
+\newpage
+
+\tableofcontents
+\newpage
+
+
+\section{Nomenclature}
+
+{\renewcommand\arraystretch{1.0}
+\noindent\begin{longtable*}{@{}l @{\quad=\quad} l@{}}
+$N$ & total number of inspection lot \\
+$n$ & number of sample size \\
+$q$ & actual quantity \\
+$Q_n$ & labelled nominal quantity \\
+$T$ & tolerable inadequate \\
+$\bar{q}$ & average contents of a sample \\
+$\lambda$ & modifying factor \\
+$\mu$ & average actual content \\
+$L$ & confidence interval \\
+$s$ & standard deviation of the samples' actual quantity  \\
+$Ac$ & acceptance number \\
+$H_0$ & null hypothesis \\
+$H_1$ & research hypothesis \\
+$\Pi$ & true but unknown proportion of defectives \\
+$\alpha$ & probability of committing a Type I error (producer’s risk) \\
+$\beta$ & probability of committing a Type II error (consumer’s risk) \\
+$d$ & abscissa in the OC curves for the T-distribution
+\end{longtable*}}
+
+\newpage
+
+\section{Problem Statement}
+
+\subsection{Introduction}
+
+Rules of metrological testing for net quantity of prepackaged products with fixed content are published by General Administration of Quality Supervision, Inspection and Quarantine of the PRC. The file stipulates the requirement and procedure of sampling, testing, and evaluation of products in prepackage with fixed content. \medskip
+
+The rules are set in order to protect the lawful right and interests of both producers and customers. In that way, there is a definite way to determine whether the net quantity of products in prepackage with fixed content is qualified. Hence, the quality of products is monitored by General Administration of Quality Supervision, Inspection and Quarantine of the PRC, and can also be supervised by the customers. 
+
+\subsection{Objectives}
+
+The goal of this report is to apply probability theory and statistic into real-life tasks about the contents of food packages and to have a deep look into the set of predefined rules issued by the Chinese government \cite{GBT}.
+
+\subsection{Definitions}
+
+\subsubsection*{Prepackaged products}
+Products that were wrapped by material or other containers before selling with predetermined amount.
+
+\subsubsection*{Products in prepackages with fixed content}
+Prepackaged products with unified mass, volume, length, area, amount and so on.
+
+\subsubsection*{Net quantity}
+The amount of products despite the container and other packing material.
+
+\subsubsection*{Nominal quantity}
+The value of net quantity displayed on the products in prepackage with fixed content by producer or seller.
+
+\subsubsection*{Actual quantity}
+The actual amount of products in prepackage with fixed content affirmed by metrology inspection according to \cite{GBT}.
+
+\subsubsection*{Metrology inspection}
+The process to decide whether the batch is qualified by extracting a certain amount of samples from a whole batch of products in prepackages with fixed content.
+
+\subsubsection*{Deviation}
+The difference of the actual amount of sample and its nominal quantity.
+
+\subsubsection*{Average deviation}
+The arithmetic mean value of the deviation of all samples.
+
+\subsubsection*{Average actual quantity}
+The arithmetic mean value of the actual quantity of all samples. 
+
+\subsubsection*{Tolerable inadequate}
+The maximum tolerable amount of deviation of a single products in prepackages with fixed content.
+
+\subsubsection*{Inadequate products in prepackages with fixed content }
+Products in prepackages with fixed content whose deviation is negative.
+
+\subsubsection*{$T_1$ type inadequate}
+Among those inadequate products in prepackages with content, if their actual quantity is less than the difference between nominal quantity and tolerable inadequate but is greater than the difference between nominal quantity and twofold tolerable inadequate, it is called $T_1$ type inadequate.
+
+\subsubsection*{$T_2$ type inadequate}
+Among those inadequate products in prepackages with content, if their actual quantity is less than twofold tolerable inadequate, it is called $T_2$ type inadequate.
+
+\subsection{Measurement requirement}
+
+The criteria to judge the quality of prepackaged products with fixed content by drawing a few samples is determined as follows:
+
+\subsubsection{Average actual quantity}
+
+The average actual quantity should not be less than its nominal quantity ($\bar{q}\ge Q_n$).
+
+\subsubsection{The relation of $N$ and $n$}
+
+According to the significance of $N$,
+\begin{enumerate}
+    \item When $N \leqslant 10$, all of the products would be tested, none of them should be found as $T_1$ type inadequate or $T_2$ type inadequate.
+    \item When $10 < N \leqslant 50$, $n = 10$, none of them should be found as $T_1$ type inadequate or $T_2$ type inadequate.
+    \item When $50 < N \leqslant 99$, $n = 13$, at most one of them could be $T_1$ type inadequate but none of them should be found as $T_2$ type inadequate.
+    \item When $99 < N \leqslant 500$, $n = 50$, at most three of them could be $T_1$ type inadequate but none of them should be found as $T_2$ type inadequate.
+    \item When $500 < N \leqslant 3200$, $n = 80$, at most five of them could be $T_1$ type inadequate but none of them should be found as $T_2$ type inadequate.
+    \item When $N > 3200 $, $n = 125$, at most seven of them could be $T_1$ type inadequate but none of them should be found as $T_2$ type inadequate.
+\end{enumerate}
+
+\newpage
+
+\section{Description of work}
+
+\subsection{Explanation of the metrology and inspection sampling scheme}
+
+The metrology and inspection sampling scheme described in JJF\ 1070-2003\ Table 4 is constructed based on the constraints listed in the rules' section 5.3, in which some equations and definitions interest us.
+
+\subsubsection{The minimum average actual quantity equation}
+\label{ans1}
+
+In subsection 5.3.1, item a) states that whether accept a lot or not should consider the deviation of average actual content ($\mu$) of prepackaged products (定量包装商品的平均实际含量的误差). The equation $\bar{q} \geqslant (Q_n - \lambda s)$ corresponds to this constraint, and it can be interpreted in mainly two ways: from the perspective of confidence interval and from the perspective of a hypothesis test. \medskip
+
+In JJF\ 1070-2003\ and this report, $t_\alpha$ follows the convention that 
+$$\int_{-\infty}^{t_\alpha}f_T(x) dx = \alpha,$$
+where $f_T$ is the density function of the $T$ distribution, which is different from the definition in course's slides.
+
+\paragraph{Relation to a confidence interval}\ \medskip
+
+The equation can be related to a one-sided 99.5\% upper confidence interval for $\mu$, which can be denoted as $L$. It is stated that the nominal quantity($Q_n$) should falls within this confidence interval, i.e, $Q_n \leqslant L$. \medskip
+
+To derive an equation which has the same meaning, we first express this confidence interval through statics. By definition, we have
+$$
+    P[\mu \leqslant L] = 0.995.
+$$
+
+We choose this one-tailed confidence interval since we want to know whether the provided $Q_n$ is too large, considering its sample's actual mean. The event $\mu \leqslant L$ can be replaced by an equivalent event $$\frac{\bar{q} - \mu}{s/\sqrt{n}} \geqslant \frac{\bar{q} - L}{s/\sqrt{n}}.$$
+
+Since the statics $$\frac{\bar{q} - \mu}{s / \sqrt{n}}$$ follows $T_{n-1}$ distribution, we can derive that
+$$
+    P[\mu \leqslant L] = P\left[\frac{\bar{q} - \mu}{s/\sqrt{n}} \geqslant \frac{\bar{q} - L}{s/\sqrt{n}}\right] = 0.995.
+$$
+
+Since $t_{0.995}$ is defined as $P[T_{n-1} \leqslant t_{0.995}] = 0.995$, by symmetry, $P[T_{n-1} \geqslant -t_{0.995}] = 0.995$. Therefore,
+
+$$
+    \begin{aligned}
+         \frac{\bar{q} - L}{s/\sqrt{n}} &= -t_{0.995}\\
+         L - \bar{q} &= t_{0.995}\cdot \frac{s}{\sqrt{n}}\\
+         L &= \bar{q} + \lambda s.
+    \end{aligned}
+$$
+
+For simplicity, we omit the sample size $n$ in the footnote of $t$. We expect that
+
+$$
+    \begin{aligned}
+        Q_n &\leqslant  L = \bar{q} + \lambda s  \\ 
+        \bar{q} &\geqslant (Q_n - \lambda s).
+    \end{aligned}
+$$
+
+Therefore, $\bar{q} \geqslant (Q_n - \lambda s)$ also means that $Q_n$ falls within a $99.5\%$ confidence interval of $\mu$. If this equation is not satisfied, then $Q_n$ is an improperly labelled value because it is too large and only $0.5\%$ of the actual mean may equal to this value.
+
+\paragraph{Relation to a hypothesis test}\ \medskip
+
+This equation can also be phrased based on item 5.3.2.1. The item 5.3.2.1 in the rules' section states that for those lots that satisfy $\mu = Q_n$, the probability that such a lot is rejected should be no more than 0.5\%. We would like to test the hypothesis,
+
+$$
+    H_0:\ \mu \geqslant Q_n \quad , \quad
+    H_1:\ \mu < Q_n 
+$$
+in such a way that $\alpha \leqslant 0.5 \%$, i.e, if $H_0$ is rejected, there is no more than $0.5\%$ chance of this being in error. When $\mu = Q_n$, the risk reach is peak, which is $0.5\%$ just as required. $H_1$ is not explicitly defined in this rules, so we choose an appropriate one. \medskip
+
+Let the critical region be $(-\infty , L_\alpha]$, where $L_\alpha$ is a constant. We accept $H_0$ when $\bar{q} \geqslant L_\alpha$. Then
+\begin{align*}
+    \alpha & = P[{\rm reject\ } H_0 \mid H_0 {\rm\ true}]\\
+    & = P[{\rm reject\ } H_0 \mid \mu \geqslant Q_n]\\
+    &\leqslant P[\bar{q} < L_\alpha \mid \mu = Q_n] \\
+    &= P\left[\frac{\bar{q} - Q_n}{s/\sqrt{n}} < \frac{L_\alpha - Q_n}{s/\sqrt{n}}\right]\\
+    &\leqslant 0.5\%
+\end{align*}
+
+Therefore,
+\begin{align*}
+        \frac{L_\alpha - Q_n}{s/\sqrt{n}} &= t_{0.005} = - t_{0.995}\\
+        L_\alpha&= Q_n - \lambda s.
+\end{align*}
+
+If $H_0$ is true and we take a sample, $P[\bar{q} \leqslant L_\alpha] \leqslant 0.5\%$. So only no more than $0.5\%$ of chance an qualified lot would be rejected, which means producer risk is no more than $0.5\%$. This is just what is required in item 5.3.2.1.
+
+\subsubsection{The tolerable inadequate}
+\label{ans2}
+
+Before we start to explain the meaning of the fifth column of Table 4, the  tolerable inadequate in $T_1$ and $T_2$ type, let us first look at section 5.3.1, the control criterion. While the equation discussed in the previous section represents item a) in the criterion, the fifth column represents item b) and item c). That is, the rules want to ensure that \medskip
+
+\begin{enumerate}
+    \item The products that have actual quantity less than its $Q_n$ minus tolerable inadequate ($T$) should occupied 2.5\% or less in a lot.
+    
+    \item There are no products whose actual contents are less than $Q_n - 2T$ in a lot.
+\end{enumerate}\medskip
+
+These requirements are implemented through acceptance sampling. The numbers in the fifth column is the acceptance number $Ac$ of the scheme. The first requirement is expanded to the first column, the sequence 0, 0, 1, 3, 5, 7, for $T_1$ type inadequate product. The second requirement turns into all 0s, for $T_2$ type inadequate, which means we will reject any lots that have such kind of products. Those 0s are quite obvious, but the derivation of the sequence 0, 0, 1, 3, 5, 7 causes us to think more deeply.
+
+\paragraph{A historical investigation for the scheme}\label{glance}\ \medskip
+
+Before we start any mathematical derivation, we may first glance at how the scheme is made (the detailed version is in \ref{detail}). In item 5.3.2.2 and item 5.3.3 b), the rules detail the requirements for this acceptance sampling: \medskip
+
+\begin{enumerate}
+    \item 5.3.2.2 states that $\Pi_0 = 2.5\%$ and $\alpha = 5\%$
+    \item 5.3.3 b) states that $\Pi_1 = 9\%$ and $\beta = 10\%$
+\end{enumerate}\medskip
+
+Please note that in this case $T_1$ and $T_2$ are treated equally. In \cite{jf4}, the author of the rule, Yaowen Huang, said that he referred to GB/T2828.1 \cite{GBT} to find the sample size ($n$) and acceptance number ($Ac$) by choosing level II in GB/T2828.1 \cite{jf4}. He did not follow the scheme strictly, instead, for the sake of convenience during actual sampling, he merged several schemes, according to Zhengwei Shao's analysis \cite{szw}. Please note that, the scheme is not originally derived from formula (to see the details, please read through \cite{jf4}), but is made by \emph{roughly} referring to tables. Therefore, we should expect that this standard would not be very precise (or even cannot satisfy its only requirement strictly) during mathematical derivation.
+
+\paragraph{Direct derivation of the possible sampling schemes for the requirement}\ \medskip
+
+We would like to test the hypothesis
+$$
+    \Pi_0: p\leqslant 2.5\% \quad,\quad \Pi_1: p\geqslant 9\%.
+$$
+
+Since the second requirement of this project restricts that we should use the sample size on Table 4. Therefore, the only unknown parameter is $Ac$. We should notice that among parameter $Ac$, $n$, $\Pi_0$, $\Pi_1$, $\beta$ and $\alpha$, only four of them are independent\cite{lhf}. If we know three of them, we can get a range for one of the other two parameters. Repeat this idea twice, we may get the value in the interception of these range (or we cannot since 5 among all the 6 parameters are already fixed).
+
+\subparagraph{The range of $Ac$ derived from the constraint of $n$, $\Pi_0$ and $\alpha$}\label{ra}\ \medskip
+
+Since $P[{\rm reject\ } H_0 \mid \Pi \leqslant \Pi_0] \leqslant P[{\rm reject\ } H_0 \mid \Pi = \Pi_0]$, when we decide $\alpha$, we should let $\alpha \geqslant P[{\rm reject\ } \mid \Pi = \Pi_0] $ to satisfy $\alpha$'s definition. The number of inadequate products ($r$) in a lot with size $N$ is $r = N \cdot \Pi_0$. Denote the number of inadequate products as $d$, Then:
+
+\begin{align*}
+    \alpha & \geqslant \sum_{d > Ac} \frac{\binom{N - r}{n - d}\binom{r}{d}}{\binom{N}{n}}\\
+    &\approx \sum_{d > Ac} \binom{n}{d}p^{d}(1-p)^{1-d}.
+\end{align*}
+
+Though this may not be a good approximation, since the ratio $n/N$ is not always small. This is the result of Yaowen Huang's merging \cite{szw}, in GB/T2828.1 (e.g. Table 6-A in \cite{GBT}), such an approximation would be acceptable. Since GB/T2828.1 is the origin of the scheme in JJF-1070, we would use this approximation. \medskip
+
+In the last several rows, the sample size is large, and since $\Pi_0 = 2.5\%$ is small, we may further approximate by using Poison distribution with $k = n\cdot \Pi_0$, we can obtain
+$$
+    \alpha \geqslant \sum_{d > Ac} \frac{k^d e^{-d}}{d!}.
+$$
+
+Here only $Ac$ is varying, so we may find $\alpha$ for each pair of $(n, Ac)$ as shown in Table \ref{avnac}.
+
+\begin{table}[H]
+\centering
+\caption{Values of $\alpha$ for different $(n, Ac)$.}
+\label{avnac}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\diagbox{$Ac$}{$n$}& 10                             & 13                             & 50                             & 80                             & 125                            \\ \hline
+0 & 0.2237                         & 0.2805                         & 0.7180                         & 0.8681                         & 0.9578                         \\ \hline
+1 & \cellcolor[HTML]{C0C0C0}0.0246 & \cellcolor[HTML]{C0C0C0}0.0406 & 0.3565                         & 0.5974                         & 0.8224                         \\ \hline
+2 & 0.0016                         & 0.0037                         & 0.1294                         & 0.3233                         & 0.6073                         \\ \hline
+3 & 0.0001                         & 0.0002                         & \cellcolor[HTML]{C0C0C0}0.0362 & 0.1406                         & 0.3811                         \\ \hline
+4 & 0.0000                         & 0.0000                         & 0.0081                         & 0.0504                         & 0.2042                         \\ \hline
+5 & 0.0000                         & 0.0000                         & 0.0015                         & \cellcolor[HTML]{C0C0C0}0.0152 & 0.0944                         \\ \hline
+6 & 0.0000                         & 0.0000                         & 0.0002                         & 0.0039                         & \cellcolor[HTML]{C0C0C0}0.0382 \\ \hline
+7 & 0.0000                         & 0.0000                         & 0.0000                         & 0.0009                         & 0.0136                         \\ \hline
+8 & 0.0000                         & 0.0000                         & 0.0000                         & 0.0002                         & 0.0043                         \\ \hline
+9 & 0.0000                         & 0.0000                         & 0.0000                         & 0.0000                         & 0.0012                         \\ \hline
+\end{tabular}
+\end{table}
+
+The grey cells in Table \ref{avnac} shows the lower bound of $Ac$ obtained by approximation since $P[{\rm reject\ } H_0] \leqslant \alpha = 5\%$. We need to do some correction for this approximation: When $N < 40$, to satisfy that $\Pi_0 \leqslant 2.5$, $d = 0$. For the cases that $n = 10$, whose $N < 50$ (row 1 and 2), we should choose $Ac = 0$ as the lower bound. Now we have \medskip
+
+\begin{enumerate}
+    \item When $N \leqslant 10$, All product would be test, at least ensure $Ac \geqslant 0$.
+    \item When $10 < N \leqslant 50$, $n = 10$, at least ensure $Ac \geqslant 0$.
+    \item When $50 < N \leqslant 99$, $n = 13$, at least ensure $Ac \geqslant 1$.
+    \item When $99 < N \leqslant 500$, $n = 50$, at least ensure $Ac \geqslant 3$.
+    \item When $500 < N \leqslant 3200$, $n = 80$, at least ensure $Ac \geqslant 5$.
+    \item When $3200 < N $, $n = 125$, at least ensure $Ac \geqslant 6$.
+\end{enumerate}
+
+\subparagraph{The range of $Ac$ retrieved from the constraint of $n$, $\Pi_1$ and $\beta$}\ \medskip
+
+Similarly, we may get a table of $P[{\rm fail\ to\ reject\ }H_0]$ for $(n, Ac)$ when considering $\beta$. Since $P[{\rm fail\ to\ reject\ }H_0 \mid \Pi \geqslant \Pi_1] \leqslant P[{\rm accept\ H_0} \mid \Pi = \Pi_1]$, when we determine the value of $\beta$, we should let $\beta \geqslant P[{\rm accept\ H_0} \mid \Pi = \Pi_0] $ to satisfy $\beta$'s definition. The approximating formula is:
+$$
+    \beta \geqslant  \sum_{d \leqslant Ac} \binom{n}{d}p^{d}(1-p)^{1-d}.
+$$
+
+Similar to the derivation of $\alpha$, when the sample size is large, and since $\Pi_1 = 9\%$ is small, we may further approximate $\beta$ by using Poison distribution with $k = n\cdot \Pi_1$. We can obtain
+$$
+    \beta \geqslant  \sum_{d \leqslant Ac} \frac{k^d e^{-d}}{d!}.
+$$
+
+We may find $\beta$ for each pair of $(n, Ac)$ as shown in Table \ref{bvnac}.
+
+\begin{table}[H]
+\centering
+\caption{Values of $\beta$ for different $(n, Ac)$.}
+\label{bvnac}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\diagbox{$Ac$}{$n$} & 10    & 13    & 50                            & 80                            & 125                          \\ \hline
+0 & 0.389 & 0.293 & 0.009                         & 0.001                         & 0.000                        \\ \hline
+1 & 0.775 & 0.671 & \cellcolor[HTML]{C0C0C0}0.053 & 0.005                         & 0.000                        \\ \hline
+2 & 0.946 & 0.895 & 0.161                         & 0.021                         & 0.001                        \\ \hline
+3 & 0.991 & 0.976 & 0.330                         & \cellcolor[HTML]{C0C0C0}0.063 & 0.003                        \\ \hline
+4 & 0.999 & 0.996 & 0.528                         & 0.143                         & 0.010                        \\ \hline
+5 & 1.000 & 0.999 & 0.707                         & 0.263                         & 0.027                        \\ \hline
+6 & 1.000 & 1.000 & 0.840                         & 0.412                         & {\cellcolor[HTML]{C0C0C0} 0.060} \\ \hline
+7 & 1.000 & 1.000 & 0.923                         & 0.568                         & 0.116                        \\ \hline
+8 & 1.000 & 1.000 & 0.967                         & 0.708                         & 0.198                        \\ \hline
+9 & 1.000 & 1.000 & 0.987                         & 0.819                         & 0.303                        \\ \hline
+\end{tabular}
+\end{table}
+
+The grey cells in Table \ref{bvnac} shows the upper bound of $Ac$ obtained by approximation since $P[{\rm accept\ H_0}] \leqslant \beta = 10\%$. Please note that when $n = 10$ and $n = 13$, we cannot find an $Ac$ let $P[{\rm accept\ H_0}] \leqslant \beta$. Also, from this table we notice that \medskip
+
+\begin{enumerate}
+    \item When $N < 10$, all products are tested, $Ac = 0$ would be feasible.
+    \item When $10 < N \leqslant 50$, $n = 10$, and $50 < N \leqslant 99$, $n = 13$, there is no $Ac$ that can satisfy the requirement
+    \item When $99 < N \leqslant 500$, $n = 50$, at least ensure $Ac \leqslant 1$, which is contradicted with the previous statement.
+    \item When $500 < N \leqslant 3200$, $n = 80$, at least ensure $Ac \leqslant 3$, which is contradicted with the previous statement.
+    \item When $3200 < N $, $n = 125$, at least ensure $Ac \leqslant 6$, which means $Ac = 6$.
+\end{enumerate}
+
+\subparagraph{Analysis on this incoherence}\label{detail}\ \medskip
+
+If we only want to ensure that the requirements in 5.3.2.2 and 5.3.3 b) are satisfied, we can find such a tuple of $(n, Ac)$. However, in this project, we have to use fixed $n$ since we are required to only  derive the sequence 0, 0, 1, 3, 5, 7. Therefore, the approximation and other consideration of the author may lead to no solution at the end of our mathematical derivation. Here we are just in this situation. \medskip
+
+As we mentioned in \ref{glance}, the scheme in JJF-1070 is not derived from formula, but from GB/T2828.1. Part 1 of GB/T2828.1 defines various sampling procedures: For different $N$ and strictness, GB/T 2828.1 provides sampling schemes, namely, the $Ac$ here, for different $\alpha$ (Table 2-A in \cite{GBT}). Also, it gives the corresponding $\Pi_1$ when $\beta = 10\%$ (Table 6-A in \cite{GBT}). \medskip
+
+As stated in \cite{jf4}, the authors of JJF-1070 first set their requirements: $\alpha = 5\%$, $\Pi_0 = 2.5\%$, etc. Then, they \emph{roughly follow} the schemes in Table 2-A in GB/T2828.1, basing on their requirement for $\alpha$. The $Ac$s there are just 0, 0, 1, 3, 5, 7. However, in GB/T2828.1, the number of $n$ is more carefully chosen, while in JJF-1070 some different choices of $n$ are merged into a single one, which will lead to extra errors. Besides, according to Table 6-A in \cite{GBT}, their scheme cannot strictly satisfy $\beta = 10\%$ when $\Pi_1 = 9\%$. Hence, it is normal that we find it impossible to strictly derive the sequence 0, 0, 1, 3, 5, 7 through derivation. When the authors make this standard, they may have to consider other issues. For example, the cost of sampling should be low. Besides, in 2005, China may lack of well-trained testers, so the schemes might not be easy to use \cite{szw}. \medskip
+
+In \ref{ra}, we derived that the lower-bounds of $Ac$s are 0, 0, 1, 3, 5, 6. In order to let $\beta$ as low as possible, we may just let $Ac$ be 0, 0, 1, 3, 5, 6. If we let the sequence be 0, 0, 1, 3, 5, 7, like the sequence in JJF-1070 and GB/T2828.1, we will favor the producers more. When $N$ is large, the loss for the producers of being rejected an eligible lot is huge. Suppose that a producer has a lot, containing fruits, with $N=100000$ and their lot is rejected only due to small inadequate portion, they will lose all their lot. Hence, even if the probability is small, there may still be some producers endure the huge lost since many producers deliver their lots everyday. Therefore, JJF 1070 looses the standard a little bit when the lot size is large. \medskip
+
+\paragraph{A brief summary for derivation of the sequence 0, 0, 1, 3, 5, 7}\ \medskip
+
+By exploring the literature, comprehending the author's explanations for JJF-1070, we may conclude that the sequence is originally obtained from GB/T2828.1. However, this scheme is quite rough, for a strict mathematical verification may lead to contradiction. Our mathematical derivation, especially the values shown in Table \ref{avnac} and Table \ref{bvnac}, shows that this sequence can roughly satisfy the requirements in 5.3.2.2 and 5.3.3 b), and protects the interests of producers more.
+
+\paragraph{Significance}\ \medskip
+
+\subparagraph{significance from a mathematical approach}\ \medskip
+
+The sequence 0, 0, 1, 3, 5, 7 ensures that we can reject $H_0$, a lot contain less than $2.5\%$ inadequate, with no more than $5\%$ of wrong judgement. The sequence 0, 0, 0, 0, 0, 0 ensures that there is no $T_2$ type of inadequate products in a lot. It is not related to a hypothesis test, so it is meaningless to explore its significance.
+
+\subparagraph{significance from a physical approach}\ \medskip
+
+This column ensures that even if $\mu \geqslant Q_n$, a lot will not contain too much inadequate products. The producer will try to maintain its quality so that the consumers' right would be protected.
+
+\subsection{The Non-central T distribution}
+
+\subsubsection{A formula for the OC Curve for the T Test}
+
+There are three possible cases for a T test. Let $T_{n-1, c}$ denote the non-central T distribution with non-centrality parameter $c$ and $n-1$ degrees of freedom,  $F_{n-1,p}$ denote the cumulative distribution function of $t_{n-1, c}$, and $X_1,\cdots, X_n$ be a random sample of size $n$ from a normal distribution with mean $\bar{x}$ and sample variance $s^2$. Let $\mu$ be the unknown true population mean and $\mu_0$ be a null value of that mean, then $\mu=\mu_0+\delta$($\delta \in R$). We still follow the definition of $t_\alpha$ which is stated before, and we have three types of $H_0$ and their corresponding critical regions at significance $\alpha$:
+
+\paragraph{i) $H_0:\mu\leqslant\mu_0$, we reject $H_0$ if $T_{n-1}>t_{1-\alpha/2,n-1}$}.\ \medskip
+
+The possibility that we fail to reject $H_0$ is given by
+% Similar to the above procedure, the formula for this case is 
+\begin{align*}
+&P[{\rm fail\ to\ reject\ }H_0]\\
+=&1-P[{\rm reject\ }H_0]\\
+=&1-P[T_{n-1}>t_{1-\alpha,n-1} \mid \mu=\mu_0+\delta]\\
+=&1 - P\left[t_{1-\alpha, n-1} < \frac{\bar{x} - \mu_0}{s/\sqrt{n}} \mid \mu=\mu_0+\delta\right]\\
+=&1 - P\left[t_{1-\alpha, n-1} < \frac{\bar{x} - \mu + \delta}{s/\sqrt{n}} \right]\\
+=&1 - P\left[t_{1-\alpha, n-1} < \left(\frac{\bar{x} - \mu}{\sigma/\sqrt{n}} + \frac{\delta}{\sigma / \sqrt{n}} \right) \Bigg/ \sqrt{\frac{s^2(n-1)}{\sigma^2}/(n-1)}\right],
+\end{align*}
+where 
+$\dfrac{\bar{x} - \mu}{\sigma/\sqrt{n}}$
+follows a standard normal distribution,
+$\dfrac{s^2(n-1)}{\sigma^2}$
+follows $\chi_{n-1}^2$ distribution, and they are independent. \medskip
+
+Therefore, 
+$$\left(\frac{\bar{x} - \mu}{\sigma/\sqrt{n}} - \frac{\delta}{\sigma / \sqrt{n}} \right) \Bigg/ \sqrt{\frac{s^2(n-1)}{\sigma^2}/(n-1)}$$ 
+follows a non-central T distribution. The non-centrality parameter is  $\dfrac{\delta}{\sigma / \sqrt{n}}$ and the degree of freedom is $n-1$, hence,
+
+\begin{align*}
+&P[{\rm fail\ to\ reject\ }H_0]\\
+=&1-P\left[t_{1-\alpha,n-1}<T_{n-1,  \frac{\delta}{\sigma / \sqrt{n}}}\right]\\
+=&1-\left(1- F_{n-1,  \frac{\delta}{\sigma / \sqrt{n}}}(t_{1-\alpha, n-1})\right)\\
+=&F_{n-1, \frac{\delta}{\sigma / \sqrt{n}}}(t_{1-\alpha, n-1})
+\end{align*}
+
+\paragraph{ii) $H_0:\mu\geqslant\mu_0$, we reject $H_0$ if $T_{n-1}<-t_{1-\alpha/2,n-1}$}\label{formula-3}.\ \medskip
+
+Similarly, we get the formula for this case:
+\begin{align*}
+&P[{\rm fail\ to\ reject\ }H_0]\\
+=&1-P[{\rm reject\ }H_0]\\
+=&1-P[T_{n-1}<-t_{1-\alpha/2,n-1} \mid \mu=\mu_0+\delta]\\
+=&1-P\left[T_{n-1,  \frac{\delta}{\sigma / \sqrt{n}}}<-t_{1-\alpha/2,n-1}\right]\\
+=&1 - F_{n-1, \frac{\delta}{\sigma / \sqrt{n}}}(-t_{1-\alpha, n-1})
+\end{align*}
+
+\paragraph{iii) $H_0:\mu=\mu_0$, we reject $H_0$ if $|T_{n-1}|>t_{1-\alpha/2,n-1}$}.\ \medskip
+
+Similarly, we get the formula for this case:
+\begin{align*}
+&P[{\rm fail\ to\ reject\ }H_0]\\
+=&1-P[{\rm reject\ }H_0]\\
+=&1-P[|T_{n-1}|>t_{1-\alpha/2,n-1} \mid \mu=\mu_0+\delta]\\
+=&1-P[T_{n-1}<-t_{1-\alpha/2,n-1} \mid \mu=\mu_0+\delta] - P[t_{1-\alpha/2,n-1}< T_{n-1}  \mid\mu=\mu_0+\delta]\\
+=&1 - \left[ 1 - F_{n-1, \frac{\delta}{\sigma / \sqrt{n}}}(t_{1-\alpha/2, n-1}) \right) - \left(F_{n-1, \frac{\delta}{\sigma / \sqrt{n}}}(-t_{1-\alpha/2, n-1})\right]\\
+=& F_{n-1, \frac{\delta}{\sigma / \sqrt{n}}}(t_{1-\alpha/2, n-1}) - F_{n-1, \frac{\delta}{\sigma / \sqrt{n}}}(-t_{1-\alpha/2, n-1})
+\end{align*}
+
+\paragraph{Summary}\label{allf}\ \medskip
+
+When plotting the OC curves, the unit of the x axis is $d$, which is normally defined as
+$$
+    d = \frac{\mu - \mu_0}{\sigma} = \frac{\delta}{\sigma}.
+$$
+
+Therefore, the non-central parameter is given by $$ \dfrac{\delta}{\sigma / \sqrt{n}} = \sqrt{n}\cdot d.$$ 
+
+The formula for all the three cases are listed below: \medskip
+
+\begin{enumerate}
+    \item When $H_0:\mu\leqslant\mu_0$, the probability that we accept $H_0$ is given by \\
+    $$F_{n-1, \sqrt{n}d}(t_{1-\alpha, n-1})$$
+    \item When $H_0:\mu\geqslant\mu_0$, the probability that we accept $H_0$ is given by\\
+    $$1- F_{n-1, \sqrt{n}d}(-t_{1-\alpha, n-1})$$
+    \item When $H_0:\mu=\mu_0$, the probability that we accept $H_0$ is given by \\
+    $$ F_{n-1, \sqrt{n}d}(t_{1-\alpha/2, n-1}) - F_{n-1,\sqrt{n}d}(-t_{1-\alpha/2, n-1})$$
+\end{enumerate}
+
+\subsubsection{Plot the OC Curves}
+
+Here $H_0:\mu_0\geqslant Q_n$, we use the formula 3 in Section \ref{allf}, where $1-\alpha=0.995$, and $n-1$ depends on the sample size $n$ in each scheme, so the formula for the OC curve is given by
+$$f(d)=1- F_{n-1, \sqrt{n}d}(-t_{0.995, n-1}).$$
+
+Since $\delta$ in this case is negative, we take the absolute value of $d$, and the plot was shown in Figure \ref{fig:oc_curve}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{noncentral_t_distribution.pdf}
+    \caption{OC Curves of the non-central T distribution.}
+    \label{fig:oc_curve}
+\end{figure}
+
+\subsubsection{Comments on the power of the test}
+
+$${\rm  Power}=1-\beta=1-P[{\rm fail\ to\ reject\ }H_0].$$
+
+From the graph we can deduce that:
+\begin{enumerate}
+    \item As $n$ increases, the power for a same $H_1$ increases. This means that for this test, the larger the sample size $n$, the more likely a customer will receive a qualified lot.
+    \item When $d$ decreases ($\mu - Q_n$ getting smaller), the power increases rapidly. This means that a customer will be less likely to received a very unqualified lot.
+\end{enumerate}
+
+\subsubsection{The probability of detecting a short fall of at least one standard in package contents}
+
+The probability of detecting a short fall of at least one standard in package contents is given by
+$$P[{\rm detect}]=1-P[{\rm failed\ to\ reject\ }H_0]= 1 - (1- F_{n-1, \sqrt{n}d}(-t_{0.995, n-1}))=F_{n-1, \sqrt{n}d}(-t_{0.995, n-1})).$$
+
+For $n=10, 13, 50, 80 ,125$, the corresponding result is 0.504, 0.701, 1.000, 1.000, 1.000, which are quite fit with the behavior of the OC curves in Figure \ref{fig:oc_curve}.
+
+\subsection{Summary and discussion of $T_1$ type inadequate}
+Section 5.3.2 put pressure on the producer, since unqualified lots may be rejected. Its subsection 5.3.2.1 and 5.3.2.2 implement this philosophy.
+
+\subsubsection{The summary and discussion for the subsection 5.3.2.1}
+The statement in this subsection focuses on the value of $Q_n$. It wants to find evidence that $\mu = Q_n$, i.e., the producer does not fake the value of $Q_n$. This is ensured by $\bar{q} \geqslant (Q_n - \lambda s)$. The detailed explanation on their relationship has be illustrated in Section \ref{ans1}.
+
+\subsubsection{The summary and discussion for the subsection 5.3.2.2}
+The statement in this subsection want lots contain only few inadequate products due to random issue. Therefore, it states that if a lot contain 2.5\% or less inadequate products, it will likely be accept. As a result, the producer would try to let their goods in a lot be all good. This is implemented through the fifth column of Table 4, and it has been discussed in Section \ref{ans2}.
+
+\newpage
+
+\section{Test Results}
+We choose all the ``CuiXiangMi'' (a kind of milk chocolate, 脆香米) in a local supermarket as our inspection lot, according to the requirement in Section 5.4.2 and performed tests to verify whether this kind of products in prepackages with Fixed content can pass the test defined in JJF-1070. There 54 packages in total in that supermarket, as shown in Figure \ref{fig:test_total}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{1.pdf}
+    \caption{Overview of a batch of prepackaged food products (54 products).}
+    \label{fig:test_total}
+\end{figure}
+
+We performed random sampling, which is defined in Appendix A.3, to test the product. According to the standard in Table 4, 13 samples are randomly selected from total 54 products, as shown in Figure \ref{fig:test_sample}. We use an electronic scale to measure the weight.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{2.pdf}
+    \caption{A sample out of a batch of prepackaged food products (13 samples).}
+    \label{fig:test_sample}
+\end{figure}
+
+We refer to Appendix B.3, method 2, in JJF-1070 to weigh the actual package content. According to the procedures defined in Appendix B.3.2.1, first we need to measure the weight and tare of two randomly selected samples as shown in Figure \ref{fig:measure}.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{3.pdf}
+        \caption{The net quantity of the first sample}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{4.pdf}
+        \caption{The tare of the first sample}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{5.pdf}
+        \caption{The net quantity of the second sample}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{6.pdf}
+        \caption{The tare of the second sample}
+    \end{subfigure}
+    \caption{The net quantity and tare of the first and second sample.}
+    \label{fig:measure}
+\end{figure}
+
+The two randomly selected products have the total weight 12.93g and 13.95g. The actual tares are 0.37g and 0.42g. The ratio between the actual package content weight $R_c$ and the tare weight $R_t$ is:
+
+$$
+  \frac{R_c}{R_t} = \frac{(12.93-0.37)+(13.95-0.42)}{0.37+0.42}=33.0
+$$
+
+According to Appendix B.3.3.1 b) and Table B.2, the measured tare $\overline{P}$ is the average tare of the two products, which is 0.395g.\medskip
+
+According to C.1.3.1 and the measured weight $GW_i$, we can calculate the actual content weight $q_i$ and the actual content deviation $D$ by the following equation:
+
+\begin{align*}
+q_i &= GW_i - \overline{P}\\
+D &= q_i - Q_n,
+\end{align*}
+
+where $Q_n$ is the nominal content, which is 12g for a single milk chocolate. The measured results were shown in Table \ref{tab:weight}.
+
+\begin{table}[H]
+  \centering
+  \caption{The measured weight, actual content weight and the deviation.}
+    \begin{tabular}{|c|c|c|}
+    \hline
+    $GW_i$ & $q_i$  & $D$ \\
+    \hline
+    12.93  & 12.535 & 0.535 \\\hline
+    13.95  & 13.555 & 1.555 \\\hline
+    12.77  & 12.375 & 0.375 \\\hline
+    12.90  & 12.505 & 0.505 \\\hline
+    12.70  & 12.305 & 0.305 \\\hline
+    13.07  & 12.675 & 0.675 \\\hline
+    13.35  & 12.955 & 0.955 \\\hline
+    13.20  & 12.805 & 0.805 \\\hline
+    12.47  & 12.075 & 0.075 \\\hline
+    13.06  & 12.665 & 0.665 \\\hline
+    13.72  & 13.325 & 1.325 \\\hline
+    12.65  & 12.255 & 0.255 \\\hline
+    12.84  & 12.445 & 0.445 \\\hline
+    % \bottomrule
+    \end{tabular}%
+  \label{tab:weight}%
+\end{table}%
+
+The sample mean and sample standard deviation is:
+\begin{equation}
+	\bar q=\frac{1}{n}\sum_{i=1}^{n}q_i=12.6496[g]
+\end{equation}
+\begin{equation}
+	s=\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(q_i-\bar q)^2}=0.4257[g]
+\end{equation}
+
+Therefore, 
+$$
+Q_n-\lambda s=12.6496 - 0.848 \times 0.4257 = 12.289[g]
+$$
+Since $12.6496 = \bar q\geq Q_n-\lambda s = 12.289$, the test equation in Table 4. Because there is no $T_1$ and $T_2$ type inadequate in our sample, this lot also passes the acceptance sampling scheme defined in Table 4. The lot of 54 products are qualified.
+\subsection{discussion}
+The inspection lot passes the test defined in JJF-1070, without surprise. Furthermore, we found that though the JJF-1070 can tolerant some inadequate, the producer of ``CuiXiangMi'' let the actual content greater than $Q_n$ significantly. At least in our sample, all of the packages contain more than $Q_n$. If the actual content of ``CuiXiangMi'' is normal distributed with $\mu = Q_n$, the probability of this event would, denoted as $A$, would $P[A] \leq \left(\frac{1}{2}\right)^{13} \approx 0$. This value is just a P value for hypothesis $\mu = Qn$. Since the P value is small, $P \approx 0$, we may state that there is evidence that the producer intentionally put more content in each package than $Q_n$. This result shows that JJF-1070 does put pressure on the producers, and protect the rights of customers. Even if we have found that it is not a very strictly defined test method, it still accomplished its mission.
+
+\newpage
+
+\section{Conclusion}
+In this project, we apply the probability theory and statistics to take a deep look into the regulations issued by General Administration of Quality Supervision.
+
+First of all, we discuss the information given by Table 4(Meteorology and Inspection Sampling Plan). We figure out the relation of the equation $\bar{q}\ge (Q_n-\lambda s)$ by applying the knowledge of confidence interval, which means that the nominal quantity should fall within the confidence interval of $\mu$.  Also, we think about the significance and derivation of the numbers (0,0,1,3,5,7) and (0,0,0,0,0,0) in Table 4. We deeply inspect the origin of the rules, try to derived the sequence mathematically and explain the incoherence through referring to literary.
+
+Additionally, we express the formula for the OC Curve of the T test in terms of the cumulative density function of non-central t distribution. The OC curve of this test method can then be expressed as $f(d)=1-F_{n-1,\sqrt{n}d}(-t_{0.995,n-1})$. We plot the graph of the OC curve based on the derived result.
+
+We also explain the various statements of Section 5.3.2. These statements have close relationship to the test method in Table 4. The aim of these statements is to put pressures on the producers so that the right of the customers can be protected.
+
+Finally, we choose milk chocolate as our inspection lot and we perform the tests defined in JJF-1070 in order to verify whether this kind of of prepackaged food products can pass the test of JJF-1070. We conclude that the milk chocolate we bought are qualified and JJF-1070 does protect the right of customers.
+\newpage
+
+\section{Code}
+
+\subsection{OC Curves}
+\begin{minted}[linenos=true]{shell}
+Plot[{CDF[NoncentralStudentTDistribution[10-1, 10^0.5*d],
+-InverseCDF[StudentTDistribution[10-1], 0.005]],
+CDF[NoncentralStudentTDistribution[13-1, 13^0.5*d],
+-InverseCDF[StudentTDistribution[13-1], 0.005]],
+CDF[NoncentralStudentTDistribution[50-1, 50^0.5*d],
+-InverseCDF[StudentTDistribution[50-1], 0.005]],
+CDF[NoncentralStudentTDistribution[80-1, 80^0.5*d],
+-InverseCDF[StudentTDistribution[80-1], 0.005]],
+CDF[NoncentralStudentTDistribution[125-1, 125^0.5*d],
+-InverseCDF[StudentTDistribution[125-1], 0.005]]}
+,{d, 0, 2},
+AxesLabel -> {"|d|", "Probability of accepting H_0"},
+PlotLegends -> {"n=10", "n=13", "n=50", "n=80", "n=125"}]
+\end{minted}
+
+\begin{thebibliography}{9}
+\bibitem{GBT}
+中华人民共和国国家质量监督检疫总局， 中国国家标准化委员会\emph{GBT2828.1-2012}。
+
+\bibitem{jf4}
+黄耀文 \emph{JJF1070-2005《定量包装商品净含量计量检验规则》理解与实施第四讲}, 江苏省质量技术监督局。
+
+\bibitem{szw}
+邵振威 \emph{关于JJF-1070-2005省略量计量检验规则中抽样原理的探讨}, 浙江省计量科学研究院。
+
+\bibitem{jf1}
+黄耀文 \emph{JJF1070-2005《定量包装商品净含量计量检验规则》理解与实施第一讲}, 江苏省质量技术监督局
+
+\bibitem{lhf}
+刘鸿飞，温德威，陈琛 \emph{JJF1070-2005 的计量检验规则之问题研究}，山东大学管理学院
+
+\bibitem{horst}
+Horst Hohberger, \emph{VE401,Probabilistic Methods in Eng. Slides}, University OF Michigan - Shanghai Jiao Tong University Joint Institute, Shanghai, China
+
+\end{thebibliography}
+
+\end{document}
