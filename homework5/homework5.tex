@@ -1,0 +1,54 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{../ve401}
+\usepackage{graphicx}
+
+\author{Group 37}
+\semester{Spring}
+\year{2019}
+\subtitle{Assignment}
+\subtitlenumber{5}
+\blockinfo{
+	\bigskip
+	\begin{center}
+		\textbf{Group members}
+	\end{center}
+	\begin{itemize}\itemsep .25cm
+		\item \href{mailto:hcm_9809@sjtu.edu.cn}{Chenmin Hou} (517370910248)
+		\item \href{mailto:liuyh615@126.com}{Yihao Liu} (515370910207)
+		\item \href{mailto:lyz0123@sjtu.edu.cn}{Yuzhou Li} (517021910922)
+	\end{itemize}
+}
+
+\begin{document}
+
+\maketitle
+
+\subsection{}
+
+\subsection{}
+
+\subsection{}
+
+\subsection{}
+
+\begin{enumerate}[label=\roman*)]
+\item
+According to Theorem 2.9.1, since $X_1$ and $X_2$ are samples of two different solid-fuel propellants, they are independent. By Central Limit Theorem we can approximate that they follow normal distributions with mean $\mu_1$ and $\mu_2$ and variance $\sigma_1^2$ and $\sigma_2^2$, then $\overline{X_1}-\overline{X_2}$ follows a normal distribution
+$$Z=\frac{(\overline{X_1}-\overline{X_2})-(\mu_1-\mu_2)}{\sqrt{\sigma_1^2/n_1+\sigma_2^2/n_2}},$$ 
+where $n_1$ and $n_2$ are the sample sizes, and $\overline{X_1}$ and $\overline{X_2}$ are the sample means of the two materials. The mean is $\mu_1-\mu_2$ and the variance is $\sqrt{\sigma_1^2/n_1+\sigma_2^2/n_2}=9/10$, and the equivalent sample size $n$ is 10. A 95\% confidence interval on the difference in means $\mu_1-\mu_2$ is
+$$(\overline{X_1}-\overline{X_2})\pm\frac{z_{\alpha/2}\cdot \sigma}{\sqrt{n}}=-6\pm\frac{1.96\cdot\sqrt{9/10}}{\sqrt{10}}=[-6.588,-5.412].$$
+The practical meaning of this interval is that based on the samples, we are 95\% certain that the the difference in means lies in $[-6.588,-5.412]$.
+\item
+This is a two tailed test, so using $\alpha=0.05$, we look up $z_{\alpha/2}=1.96$. The value of the test statistic is
+$$Z_0=\frac{\overline{x_1}-\overline{x_2}}{\sqrt{\sigma_1^2/n_1+\sigma_2^2/n_2}}=\frac{-6}{\sqrt{9/10}}\approx-6.32.$$
+Since $|Z_0|>1.96$, we reject $H_0$ at a 5\% level of significance.
+\item
+Using $\beta=0.1$, we look up $z_\beta=1.28$. According to Theorem 2.5.4, 
+$$n\approx\frac{(z_{\alpha/2}+z_\beta)^2\sigma^2}{\delta^2}=\frac{(1.96+1.27)^2\cdot9/10}{14^2}\approx0.048.$$
+So the sample size should be at least 1 to obtain a power of 0.9 in this situation.
+\end{enumerate}
+
+
+\end{document}
+
