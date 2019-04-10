@@ -33,9 +33,13 @@ $$\frac{\overline{X}-4}{0.2/\sqrt{50}}\geqslant\Phi^{-1}(0.95)\approx1.645.$$
 The critical region is determined by
 $$\overline{X}>4.046.$$
 \item
-$$-z_{\beta}=z_\alpha-\delta\sqrt{n}/\sigma=-16.03,$$
-$$\beta=\Phi(-z_{\beta})\approx 0,$$
-$${\rm power}=1-\beta=1.$$
+\begin{align*}
+{\rm Power}&=P[\overline{X}\geqslant 4.046\mid \mu\geqslant 4.5,\sigma=0.2]\\
+&\geqslant P[\overline{X}\geqslant 4.046\mid \mu= 4.5,\sigma=0.2]\\
+&=P\left[\frac{\overline{X}-4.5}{0.2/\sqrt{50}}\geqslant\frac{4.046-4.5}{0.2/\sqrt{50}}\right]\\
+&=P[Z\geqslant -16.05]=1-P[Z\leqslant -16.05]\\
+&\approx 1-0=1.
+\end{align*}
 \item
 $$1-\beta'\geqslant0.97\Longrightarrow\beta'<0.03,$$
 $$z_{\beta'}=-\Phi^{-1}(\beta')\gtrapprox 1.88,$$
@@ -54,13 +58,49 @@ So a 95\% confidence interval for $\mu$ is $\mu\geqslant4.0035$.
 $$\frac{\overline{X}-\mu_0}{\sigma/\sqrt{n}}\geqslant z_{\alpha},$$
 $$\frac{\overline{X}-100}{4/\sqrt{8}}\geqslant\Phi^{-1}(0.95)\approx1.645.$$
 The critical region is determined by
-$$\overline{X}>103.33.$$
-Since $\bar{x}=102.2<103.33$, there is no evidence to reject $H_0$ at 5\% level of significance.
+$$\overline{X}>102.33.$$
+Since $\bar{x}=102.2<102.33$, there is no evidence to reject $H_0$ at 5\% level of significance.
 \item
-$$P[]$$
+\begin{align*}
+&P[\overline{X}\geqslant 102.2\mid \mu\leqslant 100,\sigma=4]\\
+\leqslant & P[\overline{X}\geqslant 102.2\mid \mu=100,\sigma=4]\\
+=&P\left[\frac{\overline{X}-100}{4/\sqrt{8}}\geqslant\frac{102.2-100}{4/\sqrt{8}}\right]\\
+=&P[Z\geqslant 1.556]=1-P[Z\leqslant1.556]\\
+\approx&1-0.94=0.06.
+\end{align*}
+\item
+\begin{align*}
+{\rm Power}&=P[\overline{X}\geqslant 102.33\mid \mu\geqslant 105,\sigma=4]\\
+&\geqslant P[\overline{X}\geqslant 102.33\mid \mu=105,\sigma=4]\\
+&=P\left[\frac{\overline{X}-105}{4/\sqrt{8}}\geqslant\frac{102.33-105}{4/\sqrt{8}}\right]\\
+&=P[Z\geqslant -1.888]=1-P[Z\leqslant -1.888]\\
+&\approx 1-0.03=0.97.
+\end{align*}
+\item
+$$1-\beta'\geqslant0.85\Longrightarrow\beta'<0.15,$$
+$$z_{\beta'}=-\Phi^{-1}(\beta')\gtrapprox 1.035,$$
+$$n\approx\frac{(z_\alpha+z_{\beta'})^2\sigma^2}{\delta^2}\gtrapprox\frac{(1.645+1.035)^2\cdot4^2}{5^2}\approx4.597.$$
+So the required sample size is 5.
+\item
+$$\overline{x}-z_\alpha\frac{\sigma}{\sqrt{n}}=102.2-1.645\cdot\frac{4}{\sqrt{8}}\approx99.874.$$
+So a 95\% confidence interval for $\mu$ is $\mu\geqslant99.874$, and since $99.874<100$, there is no evidence to reject $H_0$ at 5\% level of significance.
 \end{enumerate}
 
 \subsection{}
+\begin{enumerate}[label=\roman*)]
+\item
+We are using Fisher’s Hypothesis Test, we test $$H_0:p_1\leqslant p_2,$$
+where $p_1$ denotes the proportion of successful repairs of larger tears and $p_2$ denotes that of shorter tears. Estimators for $p_1$ and $p_2$ are $$\hat{p_1}=14/18=\frac{7}{9}\quad,\quad\hat{p_2}=22/30=\frac{11}{15}.$$
+The pooled estimate for the common population proportion is
+$$\hat{p}=\frac{n_1\hat{p_1}+n_2\hat{p_2}}{n_1+n_2}=\frac{14+22}{18+30}=\frac{3}{4}.$$
+The observed value of the test statistic is
+$$Z=\frac{\hat{p_1}-\hat{p_2}}{\sqrt{\hat{p}(1-\hat{p})\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}=\frac{\frac{7}{9}-\frac{11}{15}}{\sqrt{\frac{3}{4}}\cdot\frac{1}{4}\cdot\left(\frac{1}{18}+\frac{1}{30}\right)}=\frac{4\sqrt{15}}{45}\approx0.344.$$
+From the standard normal table, we see that the probability of observing
+this large or a larger value is 0.36317, so we shall not reject $H_0$. Therefore, there is no sufficient evidence that the success rate is greater for longer tears.
+\item
+$$(\hat{p_1}-\hat{p_2})-z_{\alpha}\sqrt{\frac{\hat{p_1}(1-\hat{p_1})}{n_1}-\frac{\hat{p_2}(1-\hat{p_2})}{n_2}}=\left(\frac{7}{9}-\frac{11}{15}\right)-1.645\cdot\sqrt{\frac{\frac{7}{9}\cdot\frac{2}{9}}{18}+\frac{\frac{11}{15}\cdot\frac{4}{15}}{30}}\approx-0.1533.$$
+So a 95\% lower confidence bound for $p_1-p_2$ is $p_1-p_2\geqslant -0.1533$, and since $-0.1533<0$, there is no sufficient evidence that the success rate is greater for longer tears.
+\end{enumerate}
 
 \subsection{}
 
