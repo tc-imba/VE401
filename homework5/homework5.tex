@@ -24,9 +24,41 @@
 
 \maketitle
 
-\subsection{}
+\subsection{Neyman-Pearson Decision Test}
 
-\subsection{}
+\begin{enumerate}[label=\roman*)]
+\item
+$$\frac{\overline{X}-\mu_0}{\sigma/\sqrt{n}}\geqslant z_{\alpha},$$
+$$\frac{\overline{X}-4}{0.2/\sqrt{50}}\geqslant\Phi^{-1}(0.95)\approx1.645.$$
+The critical region is determined by
+$$\overline{X}>4.046.$$
+\item
+$$-z_{\beta}=z_\alpha-\delta\sqrt{n}/\sigma=-16.03,$$
+$$\beta=\Phi(-z_{\beta})\approx 0,$$
+$${\rm power}=1-\beta=1.$$
+\item
+$$1-\beta'\geqslant0.97\Longrightarrow\beta'<0.03,$$
+$$z_{\beta'}=-\Phi^{-1}(\beta')\gtrapprox 1.88,$$
+$$n\approx\frac{(z_\alpha+z_{\beta'})^2\sigma^2}{\delta^2}\gtrapprox\frac{(1.645+1.88)^2\cdot0.2^2}{0.5^2}=1.9881.$$
+So the required sample size is 2.
+\item
+Since $\overline{x}>4.046$, $H_0$ is rejected.
+$$\overline{x}-z_\alpha\frac{\sigma}{\sqrt{n}}=4.05-1.645\cdot\frac{0.2}{\sqrt{50}}\approx4.0035.$$
+So a 95\% confidence interval for $\mu$ is $\mu\geqslant4.0035$.
+\end{enumerate}
+
+\subsection{NHST}
+
+\begin{enumerate}[label=\roman*)]
+\item
+$$\frac{\overline{X}-\mu_0}{\sigma/\sqrt{n}}\geqslant z_{\alpha},$$
+$$\frac{\overline{X}-100}{4/\sqrt{8}}\geqslant\Phi^{-1}(0.95)\approx1.645.$$
+The critical region is determined by
+$$\overline{X}>103.33.$$
+Since $\bar{x}=102.2<103.33$, there is no evidence to reject $H_0$ at 5\% level of significance.
+\item
+$$P[]$$
+\end{enumerate}
 
 \subsection{}
 
@@ -73,9 +105,9 @@ Suppose that we wish to test
 $$H_0:\sigma_1^2=\sigma_2^2\quad,\quad H_1:\sigma_1^2\neq\sigma_2^2$$
 According to the data, $n_1=10$, $s_1^2=1.477\times10^{-3}$, $n_2=12$, $s_2^2=1.196\times10^{-2}$, and 
 $$f_0=\frac{s_1^2}{s_2^2}=\frac{1.477\times10^{-3}}{1.196\times10^{-2}}\approx0.123.$$
-We will reject $H_0$ if $f_0>f_{\alpha/2,n_1-1,n_2-1}=f_{\alpha/2,9,11}$ or $f_0<f_{1-\alpha/2,n_1-1,n_2-1}=f_{1-\alpha/2,9,11}$. Since $f_0$ is relatively small, we only consider $f_0<f_{1-\alpha/2,9,11}$,
-$$1-\alpha/2=P[F_{9,11}<f_{1-\alpha/2,9,11}],$$
-When $\alpha<0.004$, $f_0>f_{1-\alpha/2,9,11}$, so the P-value of the test is 0.004. The conclusion is that we can reject $H_0$ at at significance level 0.4\%, there is very much evidence to reject $H_0$.
+We will reject $H_0$ if $f_0>f_{\alpha/2,n_1-1,n_2-1}=f_{\alpha/2,9,11}$ or $f_0<f_{1-\alpha/2,n_1-1,n_2-1}=f_{1-\alpha/2,9,11}$. Since $f_0$ is relatively small, we only consider $f_0<f_{1-\alpha/2,9,11}$, and when $\alpha/2=0.002$, $f_{1-\alpha/2,9,11}\approx 0.123$.
+$$\frac{\alpha}{2}=P[F_{9,11}<f_{1-\alpha/2,9,11}\mid \sigma_1^2=\sigma_2^2]< P[F_{9,11}<f_0\mid \sigma_1^2=\sigma_2^2]\approx0.002$$
+Since it is a two-sided test, the P-value of the test is 0.004. The conclusion is that we can reject $H_0$ at at significance level 0.4\%, there is very much evidence to reject $H_0$.
 
 
 \end{document}
