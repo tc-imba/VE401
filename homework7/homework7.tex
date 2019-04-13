@@ -1,0 +1,72 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{../ve401}
+\usepackage{graphicx}
+
+\author{Group 37}
+\semester{Spring}
+\year{2019}
+\subtitle{Assignment}
+\subtitlenumber{7}
+\blockinfo{
+	\bigskip
+	\begin{center}
+		\textbf{Group members}
+	\end{center}
+	\begin{itemize}\itemsep .25cm
+		\item \href{mailto:hcm_9809@sjtu.edu.cn}{Chenmin Hou} (517370910248)
+		\item \href{mailto:liuyh615@126.com}{Yihao Liu} (515370910207)
+		\item \href{mailto:lyz0123@sjtu.edu.cn}{Yuzhou Li} (517021910922)
+	\end{itemize}
+}
+
+\begin{document}
+
+\maketitle
+
+\subsection{}
+First we let $D$ be the reaction time of auditory minus that of visual, and $M$ be the median of $D$. Then we have the value and signed rank of $D_i$ in the table:
+\begin{center}
+\small
+\begin{tabular}{c|ccccccccccccccc}
+Subject & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 \\
+Visual & 161 & 203 & 235 & 176 & 201 & 188 & 228 & 211 & 191 & 178 & 159 & 227 & 193 & 192 & 212 \\
+Auditory & 157 & 207 & 198 & 161 & 234 & 197 & 180 & 165 & 202 & 193 & 173 & 137 & 182 & 159 & 156 \\
+$D$ & -4 & +4 & -37 & -15 & +33 & +9 & -48 & -46 & +11 & +15 & +14 & -90 & -11 & -33 & -56 \\
+Signed Rank & -1.5 & +1.5 & -11 & -7.5 & +9.5 & +3 & -13 & -12 & +4.5 & +7.5 & +6 & -15 & -4.5 & -9.5 & -14
+\end{tabular}
+\end{center}
+\begin{enumerate}[label=\roman*)]
+\item
+With a paired T-test, we hence test $H_0 : \mu_D \leqslant 0$. From the $n = 15$ data we have $\overline{D} = -16.93$ and $s_D^2 = 1135.92$. The test statistic is
+$$T=\frac{\overline{D}}{s_D/\sqrt{n}}=\frac{-16.93}{\sqrt{1135.92/15}}\approx-1.945.$$
+Let $\alpha=0.05$, $t_{\alpha,15}=1.75$, and since $-1.945<-t_{\alpha,15}$, we can reject $H_0$ at 5\% level of significance, which means there is no sufficient evidence that the visual reaction time tends to be slower than the auditory reaction time.
+\item
+With a Wilcoxon signed rank test, we hence test $H_0 : M\geqslant M_0=0$, calculate
+$$W_+=1.5+9.5+3+4.5+7.5+6=32,$$
+$$|W_-|=1.5+11+7.5+13+12+15+4.5+9.5+14=88.$$
+We take $W=W_+=32$, and with $n = 15$ observations we have the critical value of 30 for a one-tailed test with $P = 0.05$, since $W=32>30$, we failed to reject $H_0$ a 5\% level of significance, which means there is no sufficient evidence that the visual reaction time tends to be slower than the auditory reaction time.
+
+\end{enumerate}
+
+\subsection{}
+\begin{enumerate}[label=\roman*)]
+\item
+We are using Fisher’s Hypothesis Test, we test $$H_0:p_1\leqslant p_2,$$
+where $p_1$ denotes the proportion of successful repairs of larger tears and $p_2$ denotes that of shorter tears. Estimators for $p_1$ and $p_2$ are $$\hat{p_1}=14/18=\frac{7}{9}\quad,\quad\hat{p_2}=22/30=\frac{11}{15}.$$
+The pooled estimate for the common population proportion is
+$$\hat{p}=\frac{n_1\hat{p_1}+n_2\hat{p_2}}{n_1+n_2}=\frac{14+22}{18+30}=\frac{3}{4}.$$
+The observed value of the test statistic is
+$$Z=\frac{\hat{p_1}-\hat{p_2}}{\sqrt{\hat{p}(1-\hat{p})\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}=\frac{\frac{7}{9}-\frac{11}{15}}{\sqrt{\frac{3}{4}}\cdot\frac{1}{4}\cdot\left(\frac{1}{18}+\frac{1}{30}\right)}=\frac{4\sqrt{15}}{45}\approx0.344.$$
+From the standard normal table, we see that the probability of observing
+this large or a larger value is 0.36317, so we shall not reject $H_0$. Therefore, there is no sufficient evidence that the success rate is greater for longer tears.
+\item
+$$(\hat{p_1}-\hat{p_2})-z_{\alpha}\sqrt{\frac{\hat{p_1}(1-\hat{p_1})}{n_1}-\frac{\hat{p_2}(1-\hat{p_2})}{n_2}}=\left(\frac{7}{9}-\frac{11}{15}\right)-1.645\cdot\sqrt{\frac{\frac{7}{9}\cdot\frac{2}{9}}{18}+\frac{\frac{11}{15}\cdot\frac{4}{15}}{30}}\approx-0.1533.$$
+So a 95\% lower confidence bound for $p_1-p_2$ is $p_1-p_2\geqslant -0.1533$, and since $-0.1533<0$, there is no sufficient evidence that the success rate is greater for longer tears.
+\end{enumerate}
+
+\subsection{}
+
+
+\end{document}
+
