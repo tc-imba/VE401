@@ -66,6 +66,34 @@ So a 95\% lower confidence bound for $p_1-p_2$ is $p_1-p_2\geqslant -0.1533$, an
 \end{enumerate}
 
 \subsection{}
+The density function of binomial distribution is
+$$f_X(x)=\binom{n}{x}p^x(1-p)^{n-x}.$$
+Obtain a random sample $x_1,\cdots,x_m$ from the distribution, a maximum likelihood estimator for $p$ is
+$$L(p)=\prod_{i=1}^n f_X(x_i)=\prod_{i=1}^m\binom{n}{x_i}p^{x_i}(1-p)^{n-{x_i}}.$$
+We take the logarithm of the above expression:
+$$\ln L(p)=\sum_{i=1}^m\left[\ln\binom{n}{x_i}+x_i\ln p+(n-x_i)\ln(1-p)\right]=\sum_{i=1}^m\ln\binom{n}{x_i}+\sum_{i=1}^mx_i\ln p+\left(mn-\sum_{i=1}^mx_i\right)\ln(1-p).$$
+Maximizing $ln L(p)$ will also maximize $L(p)$, so we take the first derivative and set it equal to zero:
+$$\frac{d\ln L(p)}{dp}=\frac{1}{p}\sum_{i=1}^mx_i-\frac{1}{1-p}\left(mn-\sum_{i=1}^mx_i\right)=0,$$
+$$p=\frac{1}{mn}\sum_{i=1}^mx_i=\frac{\overline{x}}{n}.$$
+According to the data provided, we calculate a maximum-likelihood estimator for $p$ is
+$$\hat{p}=\frac{\overline{x}}{n}=\frac{0\cdot39+1\cdot23+2\cdot12+3\cdot1}{75\cdot24}=\frac{1}{36}.$$
+In order to apply the binomial distribution, we first calculate
+\begin{align*}
+P[X=0]=\binom{24}{0}\left(\frac{1}{36}\right)^0\left(\frac{35}{36}\right)^{24}\approx0.5086,\quad & E_0=75\cdot0.5086\approx38.145,\\
+P[X=1]=\binom{24}{1}\left(\frac{1}{36}\right)^1\left(\frac{35}{36}\right)^{23}\approx0.3488,\quad & E_1=75\cdot0.3488\approx26.156,\\
+P[X=2]=\binom{24}{2}\left(\frac{1}{36}\right)^2\left(\frac{35}{36}\right)^{22}\approx0.1146,\quad & E_2=75\cdot0.1146\approx8.594,\\
+P[X\geqslant3]=1-P[X=0]-P[X=1]-P[X=2]\approx0.028,\quad & E_3=75\cdot0.028\approx2.1.
+\end{align*}
+Since $E_3<5$, a Pearson Statistic is not satisfied, so the problem can be solved by combining the last two categories, making $E_2'=E_2+E_3=10.694$, $P[X\geqslant 2]=0.1426$. The test
+$$H_0: {\rm the\ number\ of\ underfilled\ bottles\ follows\ a\ binomial\ distribution\ with\ parameter\ } k=\frac{1}{36}$$
+is then equivalent to the test
+$$H_0: {\rm the\ number\ of\ underfilled\ bottles\ follows\ a\ categorical\ distribution\ with\ parameter\ } (0.5086,0.3488,0.1426).$$
+For $N = 3$ categories, the statistic 
+$$X^2=\sum_{i=1}^N\frac{(O_i-E_i)^2}{E_i}$$
+then follows a chi-squared distribution with $N-1-m=3-1-1=1$ degree of freedom. We want to realize $\alpha = 0.05$ and therefore reject $H_0$ if $X^2 > \chi^2_{0.05,1} = 3.84$. Now
+$$X^2=\frac{(39-38.145)^2}{38.145}+\frac{(23-26.156)^2}{26.156}+\frac{(13-10.694)^2}{10.694}\approx0.897<3.84,$$
+so we are unable to reject $H_0$ at the 5\% level of significance, there is no evidence that a binomial distribution is not an appropriate model.
+
 
 
 \end{document}
