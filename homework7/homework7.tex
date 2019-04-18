@@ -137,9 +137,91 @@ In a practical sense, by inspecting the data of the above table, we can find tha
 
 \subsection{}
 According to Equation 3.2.4,
-$$\hat{\beta_1}=B_1=\sum_{i=1}^nc_iY_i,\quad c_i=(x_i-\overline{x})/\sum_{i=1}^n(x_i-\overline{x})^2.$$
+$$\hat{\beta_1}=B_1=\sum_{i=1}^nc_iY_i,\quad c_i=(x_i-\overline{x})/\sum_{i=1}^n(x_i-\overline{x})^2=(x_i-\overline{x})/S_{xx}.$$
 Then
-$${\rm Cov}(\overline{Y},\hat{\beta_1})=$$
+$${\rm Cov}(\overline{Y},\hat{\beta_1})={\rm Cov}\left(\frac{1}{n}\sum_{i=1}^nY_i,\sum_{i=1}^nc_iY_i\right)=\frac{1}{n}{\rm Cov}\left(\sum_{i=1}^nY_i,\sum_{i=1}^nc_iY_i\right).$$
+By the bilinear property of covariance, we have
+$${\rm Cov}(\overline{Y},\hat{\beta_1})=\frac{1}{n}\sum_{i=1}^n\sum_{j=1}^n{\rm Cov}(Y_i,c_jY_j).$$
+When $i\neq j$, $Y_i$ and $Y_j$ are independent, then ${\rm Cov}(Y_i,Y_j)=0$,
+$${\rm Cov}(\overline{Y},\hat{\beta_1})=\frac{1}{n}\sum_{i=1}^n{\rm Cov}(Y_i,c_iY_i)=\frac{1}{n}\sum_{i=1}^n\frac{x_i-\overline{x}}{S_{xx}}{\rm Cov}(Y_i,Y_i).$$
+Assuming that all of the random distributions $Y_i$ have the same variance so that ${\rm Cov}(Y_i,Y_i)=\sigma^2$,
+$${\rm Cov}(\overline{Y},\hat{\beta_1})=\frac{\sigma^2}{n\cdot S_{xx}}\sum_{i=1}^n(x_i-\overline{x})=0.$$
+Since $\hat{\beta_0}$ and $\hat{\beta_1}$ are unbiased estimators,
+$$E[\hat{\beta_0}]=\beta_0,\quad E[\hat{\beta_1}]=\beta_1,$$
+$$\overline{Y}=\hat{\beta_0}+\hat{\beta_1}\overline{x},\quad E[\overline{Y}]=E[\hat{\beta_0}+\hat{\beta_1}\overline{x}]=\beta_0+\beta_1\overline{x}.$$
+Then
+\begin{align*}
+{\rm Cov}(\overline{Y},\hat{\beta_1})
+&=E[(\overline{Y}-E[\overline{Y}])(\hat{\beta_1}-E[\hat{\beta_1}])]\\
+&=E[(\hat{\beta_0}+\hat{\beta_1}\overline{x}-\beta_0-\beta_1\overline{x})(\hat{\beta_1}-\beta_1)]\\
+&=E[(\hat{\beta_0}-\beta_0)(\hat{\beta_1}-\beta_1)+\overline{x}(\hat{\beta_1}-\beta_1)^2]\\
+&=E[(\hat{\beta_0}-E[\hat{\beta_0}])(\hat{\beta_1}-E[\hat{\beta_1}])]+\overline{x}E[(\hat{\beta_1}-E[\hat{\beta_1}])^2]\\
+&={\rm Cov}(\hat{\beta_0},\hat{\beta_1})+\overline{x}{\rm Var}(\hat{\beta_1})\\
+&=0.
+\end{align*}
+$${\rm Cov}(\hat{\beta_0},\hat{\beta_1})=-\overline{x}{\rm Var}(\hat{\beta_1})=-\frac{\overline{x}}{S_{xx}}\sigma^2.$$
 
+\subsection{}
+$$\frac{\rm SSE_{pe}}{\sigma^2}=\sum_{i=1}^k\sum_{j=1}^{n_i}\frac{(Y_{ij}-\overline{Y_i})^2}{\sigma^2}=\sum_{i=1}^k\frac{(n_i-1)S_i^2}{\sigma^2}.$$
+According to Theorem 2.3.2,
+$$\chi^2_{n_i-1}=\frac{(n_i-1)S_i^2}{\sigma^2}$$
+is chi-squared distributed with n − 1 degrees of freedom.
+
+According to Lemma 2.3.1, 
+$$\chi^2_\alpha=\sum_{i=1}^k\chi^2_{\gamma_k}=\sum_{i=1}^k\chi^2_{n_i-1}=\frac{\rm SSE_{pe}}{\sigma^2}$$
+is chi-squared distributed with $\alpha=\sum\limits_{i=1}^k\gamma_k=n-k$ degrees of freedom.
+
+\subsection{}
+\begin{enumerate}[label=\roman*)]
+\item\ \\
+\includegraphics[width=\linewidth]{ex7_8_1.pdf}
+\item\ \\
+\includegraphics[width=0.45\linewidth]{ex7_8_2.pdf}
+
+So the T-Statistic for $m$ is 271.532, and its P-value is $4.18943\times10^{-24}$, which is very small. The regression is very significant.
+\item\ \\
+\includegraphics[width=\linewidth]{ex7_8_3.pdf}
+
+So the P-value of the test is 0.0193, there is no evidence to reject that the linear regression model is appropriate.
+\end{enumerate}
+
+\subsection{}
+$$B_1=\frac{S_{xy}}{S_{xx}},\quad S=\sqrt{\frac{\rm SSE}{n-2}}=\sqrt{\frac{S_{yy}-B_1S_{xy}}{n-2}}=\sqrt{\frac{S_{yy}-S_{xy}^2/S_{xx}}{n-2}},\quad R=\frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}}.$$
+Then
+$$\frac{B_1}{S/\sqrt{S_{xx}}}=\frac{S_{xy}}{\sqrt{S_{xx}}}\cdot\frac{\sqrt{n-2}}{\sqrt{S_{yy}-S_{xy}^2/S_{xx}}}=\frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}}\cdot\frac{\sqrt{n-2}}{\sqrt{1-S_{xy}^2/S_{xx}S_{yy}}}=\frac{R\sqrt{n-2}}{\sqrt{1-R^2}}.$$
+
+\subsection{}
+According to the data, we obtain
+$$n=42,\quad \sum_{i=1}^nx_i=1170.1,\quad \sum_{i=1}^ny_i=125660,$$
+$$\sum_{i=1}^nx_i^2=33426.67,\quad \sum_{i=1}^ny_i^2=408775200,\quad \sum_{i=1}^nx_iy_i=3653682.$$
+\begin{enumerate}[label=\roman*)]
+\item
+$$b_1=\frac{n\sum\limits_{i=1}^nx_iy_i-\sum\limits_{i=1}^nx_i\sum\limits_{i=1}^ny_i}{n\sum\limits_{i=1}^nx_i^2-\left(\sum\limits_{i=1}^nx_i\right)^2}=\frac{42\cdot3653682-1170.1\cdot125660}{42\cdot33426.67-1170.1^2}\approx184.55,$$
+$$b_0=\overline{y}-b_1\overline{x}=\frac{\sum\limits_{i=1}^ny_i-b_1\sum\limits_{i=1}^nx_i}{n}=\frac{125660-184.55\cdot1170.1}{42}\approx-2149.65.$$
+So $$\hat{\mu}_{Y|x}=\hat{y}=-2149.65+184.55x.$$
+\item
+\begin{align*}
+S_{xx}&=\sum_{i=1}^n(x_i-\overline{x})^2=\sum_{i=1}^nx_i^2-\frac{1}{n}\left(\sum_{i=1}^nx_i\right)^2=33426.67-\frac{1170.1^2}{42}\approx828.24,\\
+S_{yy}&=\sum_{i=1}^n(y_i-\overline{y})^2=\sum_{i=1}^ny_i^2-\frac{1}{n}\left(\sum_{i=1}^ny_i\right)^2=408775200-\frac{125660^2}{42}{42}\approx32812447,\\
+S_{xy}&=\sum_{i=1}^n(x_i-\overline{x})(y_i-\overline{y})=\sum_{i=1}^nx_iy_1-\frac{1}{n}\left(\sum_{i=1}^nx_i\right)\left(\sum_{i=1}^ny_i\right)=3653682-\frac{1170.1\cdot125660}{42}\approx152854.
+\end{align*}
+Then
+$$\hat{\sigma}^2=\frac{\rm SSE}{n-2}=\frac{S_{yy}-B_1S_{xy}}{n-2}=\frac{32812447-184.55\cdot152854}{42-2}\approx115081.$$
+\item
+A 90\% confidence interval for the slope of the regression line is given by
+$$b_1\pm t_{\alpha/2,n-2}\frac{s}{\sqrt{S_{xx}}}=184.55\pm1.684\cdot\frac{\sqrt{115081}}{\sqrt{828.24}}\approx[164.70,204.40].$$
+A 90\% confidence interval for the intercept of the regression line is given by
+$$b_0\pm t_{\alpha/2,n-2}\frac{s\sqrt{\sum\limits_{i=1}^nx_i^2}}{\sqrt{nS_{xx}}}=-2149.65\pm1.684\cdot\frac{\sqrt{115081}\cdot\sqrt{33426.67}}{\sqrt{42\cdot 828.24}}\approx[-2709.65,-1589.65].$$
+\item
+We test $$H_0:\beta_1=0,$$
+at significance level $\alpha=0.05$, the test statistic is
+$$T_{n-2}=\frac{B_1}{S/\sqrt{S_{xx}}}=\frac{184.55}{\sqrt{115081/828.24}}\approx15.66.$$
+Since $t_{\alpha/2,n-2}=t_{0.025,40}=2.021<15.66$, we reject $H_0$ at 5\% level of significance, so there is no evidence that the regression is not significant.
+\item
+$$R^2=\frac{S_{xy}^2}{S_{xx}S_{yy}}=\frac{152854^2}{828.24\cdot32812447}\approx0.860.$$
+\item\ \\
+\includegraphics[width=\linewidth]{ex7_10.pdf}
+So the assumption of constant variance seems not satisfied.
+\end{enumerate}
 \end{document}
 
