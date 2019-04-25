@@ -2,6 +2,7 @@
 
 \usepackage{../ve401}
 \usepackage{graphicx}
+\usepackage{bbold}
 
 \author{Group 37}
 \semester{Spring}
@@ -39,7 +40,107 @@ which means that both tests are mathematically equivalent.
 \subsection{}
 \begin{enumerate}[label=\roman*)]
 \item
+Let $$\overline{h_i}=\frac{1}{n}\sum_{j=1}^nh_{ji},$$
+$$PH=\frac{1}{n}\begin{pmatrix}
+1 & 1 & \cdots & 1 \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & 1 & \cdots & 1 
+\end{pmatrix}\begin{pmatrix}
+h_{11} & h_{12} & \cdots & h_{1n} \\
+\vdots & \vdots & \ddots & \vdots \\
+h_{n1} & h_{n2} & \cdots & h_{nn} 
+\end{pmatrix}=\begin{pmatrix}
+\overline{h_1} & \overline{h_2} & \cdots & \overline{h_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\overline{h_1} & \overline{h_2} & \cdots & \overline{h_n} 
+\end{pmatrix},$$
+$$HP=H^TP=\frac{1}{n}\begin{pmatrix}
+h_{11} & h_{21} & \cdots & h_{n1} \\
+\vdots & \vdots & \ddots & \vdots \\
+h_{1n} & h_{2n} & \cdots & h_{nn} 
+\end{pmatrix}\begin{pmatrix}
+1 & 1 & \cdots & 1 \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & 1 & \cdots & 1 
+\end{pmatrix}=\begin{pmatrix}
+\overline{h_1} & \overline{h_2} & \cdots & \overline{h_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\overline{h_1} & \overline{h_2} & \cdots & \overline{h_n} 
+\end{pmatrix}.$$
+So $$PH=HP.$$
+And since
+$$(PH)^T=H^TP^T=HP=PH,$$
+we can find that $PH=HP$ is a symmetric matrix, thus
+$$\overline{h_1}=\overline{h_2}=\cdots=\overline{h_n},$$
+$$PH=HP=aP,$$
+where $a=n\overline{h_1}.$
+In addition,
+$$aPX=PHX=PX(X^TX)^{-1}X^TX=PX\Longrightarrow a=1.$$
+Then
+$$PH=HP=P,$$
+$$(H-P)^2=H^2-HP-PH+P^2=H-P-P+P=H-P,$$
+$$(H-P)^T=H^T-P^T=H-P.$$
+So $H-P$ is an orthogonal projection, and
+$${\rm SSR}=\langle Y,(H-P)Y\rangle=\langle (H-P)Y,(H-P)Y\rangle.$$
+\item
+$${\rm tr\ }P=\sum_{i=1}^np_{ii}=\frac{1}{n}\cdot n=1,$$
+$${\rm tr\ }H={\rm tr}(X(X^TX)^{-1}X^T)={\rm tr}((X^TX)^{-1}X^TX)={\rm tr}(\mathbb{1}_{p+1})=p+1,$$
+$${\rm tr}(H-P)={\rm tr\ }H-{\rm tr\ }P=p.$$
+\item
+$$X\beta=\begin{pmatrix}
+1 & x_{11} & \cdots & x_{p1} \\
+1 & x_{12} & \cdots & x_{p2} \\
+\vdots & \vdots & \ddots & \vdots \\ 
+1 & x_{1n} & \cdots & x_{pn}
+\end{pmatrix}\begin{pmatrix}
+\beta_0 \\ 0 \\ \vdots \\ 0
+\end{pmatrix}=\begin{pmatrix}
+\beta_0 \\ \beta_0 \\ \vdots \\ \beta_0
+\end{pmatrix},$$
+$$(H-P)X\beta=(HX)\beta-P(X\beta)=X\beta-P(X\beta)=0.$$
+We can now derive the distribution of SSR. Recall that in our model $Y=X\beta+E$ where $E$ follows a normal distribution with mean zero and variance $\sigma^2$, we find 
+\begin{align*}
+{\rm SSR}&=\langle (H-P)Y,(H-P)Y\rangle \\
+&=\langle (H-P)(X\beta+E),(H-P)(X\beta+E)\rangle\\
+&=\langle (H-P)E,(H-P)E\rangle\\
+&=\langle E,(H-P)E\rangle.
+\end{align*}
+Since each $E_j$ follows an independent normal distribution with mean zero and $\sigma^2$, we have
+$$\frac{\rm SSR}{\sigma^2}=\left\langle\frac{E}{\sigma},(H-P)\frac{E}{\sigma}\right\rangle=\langle Z,(H-P)Z\rangle,$$
+where $Z = (Z_1 , \cdots , Z_n )$ is a vector of i.i.d. standard normal random variables.\medskip
 
+Since $H-P$ is a projection, the sum of its eigenvalues is also equal to the number of eigenvalues that equal 1. Hence $p$ eigenvalues of $H-P$ are equal to 1 and $n-p$  eigenvalues equal 0.\medskip
+
+Since $H-P$ is symmetric, we can apply the spectral theorem of linear algebra: there exists a matrix $U$ U (whose columns are eigenvectors of $H-P$) such that
+$$U^{-1}=U^T,$$
+and
+$$U(H-P)U^T=\begin{pmatrix}
+\mathbb{1}_p & 0 \\ 0 & 0
+\end{pmatrix}=:D_p.$$
+We now use the decomposition
+$$\frac{\rm SSR}{\sigma^2}=\langle Z,U^TD_pUZ\rangle=\langle UZ,D_pUZ\rangle=\sum_{i=1}^p(UZ)_i^2.$$
+Since each $Z_j$ follows an independent standard normal distribution, so does each component of UZ. We can
+conclude immediately that SSR follows a chi-squared distribution with $p$ degrees of freedom.
+\item
+$$(\mathbb{1}-H)(P-H)=\mathbb{1}P-HP-\mathbb{1}H+H^2=P-P-H+H=0,$$
+$$(P-H)(\mathbb{1}-H)=P\mathbb{1}-H\mathbb{1}-PH+H^2=P-H-P+H=0.$$
+So $$(\mathbb{1}-H)(P-H)=(P-H)(\mathbb{1}-H)=0.$$
+According to the definition of range and kernel,
+$$\operatorname{ran}(P-H)=\{(P-H)v:v\in\mathbb{R}^n\},$$
+$$\ker(\mathbb{1}-H)=\{v:(\mathbb{1}-H)v=0,v\in\mathbb{R}^n\}.$$
+Since $(\mathbb{1}-H)(P-H)v=0$, $v\in\mathbb{R}^n$, we can get $$\operatorname{ran}(P-H)\subset\ker(\mathbb{1}-H),$$
+and similarly, $$\operatorname{ran}(\mathbb{1}-H)\subset\ker(P-H).$$
+Suppose $(P-H)v=v$ so that $v$ is an eigenvector of $H-P$ for the eigenvalue 1, we know $(\mathbb{1}-H)v=(\mathbb{1}-H)(P-H)v=0$ is an eigenvector of $\mathbb{1}-H$ for the eigenvalue  0. And according to the symmetry, vice versa is also true. Then we can construct a matrix $U$ with $p$ columns of eigenvectors of $P-H$ and $n-p-1$ columns of eigenvectors of $\mathbb{1}-H$ and one column of eigenvector of either of the above,  such that
+$$U^{-1}=U^T,$$
+and
+$$U(\mathbb{1}_n-P)U^T=U[(\mathbb{1}_n-H)-(P-H)]U^T=\begin{pmatrix}
+\mathbb{1}_{n-p-1} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & -\mathbb{1}_p
+\end{pmatrix}=:D.$$
+We now use the decomposition
+$$S_{yy}=\langle Y,(\mathbb{1}_n-P)Y\rangle=\langle Y,YU^TDUY\rangle=\langle UY,DUY\rangle=\sum_i^{n}(UY)_i^2.$$
+So SSR and SSE are the sums of squares of independent standard normal variables, and
+$$\operatorname{SSE}=\sum_{i=1}^{p}(UY)_i^2,\quad\operatorname{SSR}=\sum_{i=p+2}^{n}(UY)_i^2,$$
+which means SSR and SSE are independent.
 \end{enumerate}
 
 \subsection{}
