@@ -1,0 +1,49 @@
+\documentclass{article}[12pt]
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{geometry}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{indentfirst}
+\usepackage{xcolor}
+\usepackage{verbatim}
+
+\begin{document}
+Let the ramdom variable $X$ denote the everyday occurrence of police shooting in the United States. We have verified that $X$ follows a Poisson distribution, $p(x)=\frac{(k)^{x}}{x !} e^{k}$. Now we are of interest in the confidence inverval for the parameter $k$. 
+
+We have already known that the a maximum-likelihood estimator for $k$ is the sample mean, $\overline{X}$. 
+
+Since our sample size is sufficient large, with the central limit theorem, it is advisable to say that our sample mean follows a normal distribution. Furthermore, we have a standard normal distribution
+\begin{equation}
+    Z=\frac{\overline{X}-k}{\sigma / \sqrt{n}} 
+\end{equation}
+
+
+We then need to find and estimator for the variance $\sigma^2$. With the property Poisson distribution. The variance of $X$ should be $Var X = k$. Therefore, the estimator for variance is the estimator for k, which is the sample mean, $\overline{X}$.
+
+Now we rewrite the equ.1 as 
+$$
+Z = \frac{\hat{k}-k}{ \hat{k}/ \sqrt{n}}
+$$
+where $\hat{k}$ is the estimator for $k$, which is $\overline{X}$.
+
+It is obvious that the a $(1 - \alpha)100\%$ confidence inverval is 
+$$
+\hat{k} \pm z_{\alpha / 2} \sqrt{\hat{k} / n}
+$$
+
+We can find that there were 3943 police shootings of the year 2015 to 2018. We can calclulate the mean occurrence of one day by
+$$
+\overline{X} = \frac{3943}{365+366+365+365} = 2.70 
+$$
+The 95\% confidence inverval can be calclulated as 
+$$
+2.70 \pm 1.96 \sqrt{2.7/3943} = (2.65 , 2.75)
+$$
+
+\end{document}
