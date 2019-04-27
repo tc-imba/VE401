@@ -58,19 +58,46 @@ $N$ & total number of inspection lot
 
 \subsection{Introduction}
 
+Fatal force and fatal shooting by police are topics that attract headlines and trigger heated debate around the world. When we are discussing these topics, it’s important to have a clear image of what ``fatal police shooting'' is. Then we will discuss the pattern of police shootings regarding to the probability. 
 
+According to the statistics from the Washington Post [3] 962 people have been shot and killed by police in the US in 2016, and 994 people were fatally shot by police in 2015. The Washington Post is compiling such a database of every fatal shooting in the United States by a police officer in the line of duty since Jan. 1, 2015. This database is based on news reports, public records, social media and other sources.
 
-\subsection{Objectives}
+For the term ``fatal police shooting,'' the Post characterizes it as those shootings in which a police officer, in the line of duty, shoots and kills a civilian — the circumstances that most closely parallel the 2014 killing of Michael Brown in Ferguson, Mo., which began the protest movement culminating in Black Lives Matter and attracted attention to police accountability nationwide [4]. What is worth attention is that the Post is not tracking deaths of people ``in police custody, fatal shootings by off-duty officers or non-shooting deaths.''
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{intro.png}  
+	\caption{Silent protest for police shooting of Michael Brown.}  
+\end{figure}
 
+Of course every single murder is a tragedy for those whom it affects, but for the bettering of the police service and the benefit of broader society we may wish to consider whether these ``shocking'' numbers lead to some patterns. In the following content, we carry out a statistical analysis on the mass shootings in the US from 2015 - 2018, exploring the distribution pattern, the dependence on weekday and month, then anticipating the number of police shootings in 2019.
 
-\subsection{Definitions}
+\subsection{Overview}
 
+First, we use \emph{Mathematica} to visualize the fatal police shooting from the data provided by \emph{WashingtonPost}\cite{} between January 1$^{\rm st}$,2015 and December 31$^{\rm st}$, 2018. The plot was shown in Figure \ref{fig:q2}.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{intro.png}
+	\caption{Number of fatal police shoots each day between January 1$^{\rm st}$,2015 and December 31$^{\rm st}$, 2018.}
+	\label{fig:q2}
+\end{figure}
+
+Note that 2016 is a leap year, which means that it has one more day (February 29$^{\rm th}$) than the other three years, so the distance between 2016 and 2017 on the x-axis is slightly different from the distance between other years.
+
+\subsection{Background}
+
+In this project, we 
 
 \newpage
 
 \section{Description of work}
+
+\subsection{Distribution of fatal police shooting each year}
+
+In the work of Spiegelhalter and Barnett\cite{}, the London homicides follow a Poisson distribution with parameter $k = 0.44$. We think the distribution of fatal police shooting in the USA may be similar to that of London homicides, so we also assume that the police shootings follow a Poisson distribution with an unknown parameter $k$ and perform a goodness-of-fit test for a discrete distribution.
+
+
 
 \subsection{q6}
 
